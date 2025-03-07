@@ -18,7 +18,6 @@ const start = async () => {
     console.log("Попытка подключения к базе данных:", dbUrl);
 
     await mongoose.connect(dbUrl);
-
     console.log("Успешно подключено к MongoDB");
 
     app.listen(PORT, () => {
@@ -26,7 +25,8 @@ const start = async () => {
     });
   } catch (e) {
     console.error("Ошибка при запуске сервера:", e);
-    process.exit(1); // Завершаем процесс, если подключение не удалось
+    console.error("Полная ошибка:", e);
+    process.exit(1);
   }
 };
 

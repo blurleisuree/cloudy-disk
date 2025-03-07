@@ -1,18 +1,24 @@
 import classes from "./LoginForm.module.css";
 import { Link } from "react-router";
 import { useFormStore } from "../../store/store";
-import { login } from "../../services/user";
+import useAuthStore from "../../store/authStore";
+// import { login } from "../../services/user";
 
 import Input from "../UI/Input/Input";
 import FormButton from "../UI/FormButton/FormButton";
 
 function LoginForm() {
   const { password, email, setPassword, setEmail, resetForm } = useFormStore();
+  const { login, error, loading } = useAuthStore();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     alert(`Форма отправлена!`);
-    login(email, password);
+    try {
+      await login(email, password);
+    } catch (e) {
+      console.error(e);
+    }
     resetForm();
   };
 
@@ -43,7 +49,12 @@ function LoginForm() {
         onClick={(e) => handleSubmit(e)}
         children="Отправить"
       />
-      <Link to='/registration' className="block mt-4 underline underline-offset-2 text-secondary-color">Еще не зарегистрированы?</Link>
+      <Link
+        to="/registration"
+        className="block mt-4 underline underline-offset-2 text-secondary-color"
+      >
+        Еще не зарегистрированы?
+      </Link>
     </div>
   );
 }

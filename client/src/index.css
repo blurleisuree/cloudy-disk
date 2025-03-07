@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 #root {
-    height: 100vh;
+  height: 100vh;
 }
 body {
-    font-family: 'Ubuntu', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
 }
