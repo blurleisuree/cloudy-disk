@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint": "eslint index.js routes/auth.routes.js",
+    "lint:all": "eslint \"**/*.js\""
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +21,8 @@
     "mongoose": "^8.11.0"
   },
   "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
     "nodemon": "^3.1.9"
   }
 }

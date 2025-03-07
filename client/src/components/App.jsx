@@ -21,7 +21,6 @@ function App() {
   const { checkAuth } = useAuthStore();
   const { isAuth } = useAuthStore();
 
-  
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -31,7 +30,7 @@ function App() {
   //   if (isAuth) {
   //     navigate("/files", { replace: true });
   //   }
-    
+
   // }, [isAuth]);
 
   return (
