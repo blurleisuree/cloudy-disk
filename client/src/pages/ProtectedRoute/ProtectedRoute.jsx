@@ -5,7 +5,6 @@ import useEffect from "react";
 
 function ProtectedRoute({ children }) {
   const { isAuth, loading } = useAuthStore();
-//   console.log("protected");
 
   useEffect(() => {
     console.log(isAuth);

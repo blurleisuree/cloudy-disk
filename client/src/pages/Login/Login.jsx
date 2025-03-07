@@ -6,7 +6,7 @@ import classes from "./Login.module.css";
 function Login() {
   return (
     <div>
-      <div className={classes.Login + ' h-screen contaier mx-auto flex items-center justify-center flex-col h-full'}>
+      <div className={classes.Login + ' h-screen contaier mx-auto flex items-center justify-center flex-col'}>
         <img src={logo} alt="logo" />
         <LoginForm />
       </div>

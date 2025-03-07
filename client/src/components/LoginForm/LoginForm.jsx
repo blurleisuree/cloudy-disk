@@ -44,11 +44,9 @@ function LoginForm() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <FormButton
-        type="submit"
-        onClick={(e) => handleSubmit(e)}
-        children="Отправить"
-      />
+      <FormButton type="submit" onClick={(e) => handleSubmit(e)}>
+        Отправить
+      </FormButton>
       <Link
         to="/registration"
         className="block mt-4 underline underline-offset-2 text-secondary-color"

@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  useNavigate,
 } from "react-router";
 import useAuthStore from "../store/authStore";
 
@@ -19,19 +18,10 @@ import { useEffect } from "react";
 
 function App() {
   const { checkAuth } = useAuthStore();
-  const { isAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (isAuth) {
-  //     navigate("/files", { replace: true });
-  //   }
-
-  // }, [isAuth]);
 
   return (
     <BrowserRouter>

@@ -7,7 +7,7 @@ function Error() {
     <div
       className={
         classes.Error +
-        " h-screen contaier mx-auto flex items-center justify-center flex-col h-full"
+        " h-screen contaier mx-auto flex items-center justify-center flex-col"
       }
     >
       <img src={logo} alt="logo" />

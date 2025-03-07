@@ -6,7 +6,7 @@ import classes from "./Registration.module.css";
 function Registration() {
   return (
     <div>
-      <div className={classes.Registration + ' h-screen contaier mx-auto flex items-center justify-center flex-col h-full'}>
+      <div className={classes.Registration + ' h-screen contaier mx-auto flex items-center justify-center flex-col'}>
         <img src={logo} alt="logo" />
         <RegistrationForm />
       </div>
