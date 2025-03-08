@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-function Input({ label, type = "text", name, value, onChange, error }) {
+function Input({ label, type = "text", register, errors, name, placeholder }) {
+
   return (
     <div className={classes.Input__wrapper + " mb-4"} htmlFor={name}>
       <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -14,9 +15,12 @@ function Input({ label, type = "text", name, value, onChange, error }) {
         }
         type={type}
         name={name}
-        value={value}
-        onChange={onChange}
+        placeholder={placeholder}
+        {...register(name)}
       />
+      {errors && (
+        <span className="text-base text-red-600">{errors.message}</span>
+      )}
     </div>
   );
 }

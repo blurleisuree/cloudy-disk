@@ -1,53 +1,97 @@
 import classes from "./AuthForm.module.css";
-import { Link } from "react-router";
-import { useFormStore } from "../../store/store";
+import { useState } from "react";
+
 import useAuthStore from "../../store/authStore";
 
 import Input from "../UI/Input/Input";
 import FormButton from "../UI/FormButton/FormButton";
-import { useState } from "react";
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email("Неправильный формат email")
+    .required("Email обязателен")
+    .max(30, "Слишком большой email")
+    .trim(),
+  password: Yup.string()
+    .min(5, "Пароль должен быть не менее 5-ти символов")
+    .max(12, "Пароль должен быть не более 12-ти символов")
+    .required("Пароль обязателен")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/,
+      "Пароль должен содержать минимум одну букву"
+    ),
+});
 
 function AuthForm() {
-  const { password, email, setPassword, setEmail, resetForm } = useFormStore();
-  const { login, register, error, loading } = useAuthStore();
-  const [isLogin, setIsLogin] = useState(true);
+  const { login, registration } = useAuthStore();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+  });
+
+  const onSubmit = async (data) => {
     alert(`Форма отправлена!`);
     try {
-      isLogin ? await login(email, password) : await register(email, password);
+      isLogin
+        ? await login(data.email, data.password)
+        : await registration(data.email, data.password);
     } catch (e) {
-      console.error(e);
+      // console.error(e);
+      alert(e);
     }
-    resetForm();
+    reset();
   };
 
   return (
-    <div
+    <form
       className={
         classes.AuthForm +
         " bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-1/6 self-center"
       }
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h3 className="font-medium text-2xl mb-6">
         {isLogin ? "Вход" : "Регистрация"}
       </h3>
+
       <Input
         label="Email адрес"
-        type="email"
+        type="text"
         name="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        placeholder="your@email.com"
+        register={register}
+        errors={errors.email}
       />
       <Input
         label="Пароль"
-        type="password"
+        type={showPassword ? "text" : "password"}
         name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        placeholder="somepassword"
+        register={register}
+        errors={errors.password}
       />
-      <FormButton type="submit" onClick={(e) => handleSubmit(e)}>
+
+      <input
+        type="checkbox"
+        onClick={() => setShowPassword(!showPassword)}
+        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:rounded-sm active:rounded-sm"
+      />
+      <label className="ms-2 mt-1">Показать пароль</label>
+
+      <FormButton type="submit">
         {isLogin ? "Войти" : "Зарегестрироваться"}
       </FormButton>
       <p
@@ -56,8 +100,10 @@ function AuthForm() {
       >
         {isLogin ? "Еще не зарегистрированы?" : "Уже есть аккаунт?"}
       </p>
-    </div>
+    </form>
   );
 }
 
 export default AuthForm;
+
+// TODO: модальное окно при ошибке входа

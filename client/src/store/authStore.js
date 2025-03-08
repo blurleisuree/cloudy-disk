@@ -35,7 +35,7 @@ const useAuthStore = create((set) => ({
     }
   },
 
-  register: async (email, password) => {
+  registration: async (email, password) => {
     set({ loading: true, error: null });
     try {
       const response = await fetch(
