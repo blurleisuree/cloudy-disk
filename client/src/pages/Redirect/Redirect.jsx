@@ -1,23 +1,23 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import classes from "./Redirect.module.css";
-import Loader from "../../components/UI/Loader/Loader";
+import LoaderPage from "../../components/LoaderPage/LoaderPage";
+import useAuthStore from "../../store/authStore";
 
 function Redirect() {
   const navigate = useNavigate();
+  const isAuth = useAuthStore((state) => state.isAuth);
 
   useEffect(() => {
-    // Здесь можно добавить логику перед редиректом
     setTimeout(() => {
+      if (isAuth) {
+        navigate("/files", { replace: true });
+      }
+
       navigate("/auth", { replace: true });
     }, 1000);
-  }, [navigate]);
+  }, [navigate, isAuth]);
 
-  return (
-    <div className="h-screen flex items-center justify-center">
-      <Loader />
-    </div>
-  );
+  return <LoaderPage />;
 }
 
 export default Redirect;

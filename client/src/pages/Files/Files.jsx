@@ -1,5 +1,3 @@
-import classes from "./Files.module.css";
-
 import FormButton from "../../components/UI/FormButton/FormButton";
 import Modal from "../../components/Modal/Modal";
 import useAuthStore from "../../store/authStore";
@@ -19,7 +17,7 @@ function Files() {
 
   return (
     <div>
-      {modalIsActive && <Modal closeModal={closeModal} logout={logout}/>}
+      {modalIsActive && <Modal closeModal={closeModal} logout={logout} />}
       <h1 className="text-5xl">Файлы</h1>
       <FormButton onClick={openModal}>Выйти</FormButton>
     </div>

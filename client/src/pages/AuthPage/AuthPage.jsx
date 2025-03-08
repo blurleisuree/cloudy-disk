@@ -4,7 +4,6 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 import classes from "./AuthPage.module.css";
 
 function AuthPage() {
-  
   return (
     <div>
       <div
@@ -16,7 +15,7 @@ function AuthPage() {
         <img src={logo} alt="logo" />
         <AuthForm />
       </div>
-      
+
       <p className="text-md text-gray-500 absolute bottom-8 left-8 opacity-3 font-medium">
         © 2025 Cloudy Диск
       </p>
