@@ -84,7 +84,7 @@ router.get("/me", async (req, res) => {
     }
 
     const decoded = jwt.verify(token, config.get("secretKey"));
-    const user = await User.findById(decoded.userId);
+    const user = await User.findById(decoded.id);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

@@ -6,15 +6,15 @@ import Loader from "../../components/UI/Loader/Loader";
 function Redirect() {
   const navigate = useNavigate();
 
-    useEffect(() => {
-      // Здесь можно добавить логику перед редиректом
-      setTimeout(() => {
-        navigate("/login", { replace: true });
-      }, 1000)
-    }, [navigate]);
+  useEffect(() => {
+    // Здесь можно добавить логику перед редиректом
+    setTimeout(() => {
+      navigate("/auth", { replace: true });
+    }, 1000);
+  }, [navigate]);
 
   return (
-    <div className='h-screen flex items-center justify-center'>
+    <div className="h-screen flex items-center justify-center">
       <Loader />
     </div>
   );

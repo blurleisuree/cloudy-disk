@@ -67,7 +67,6 @@ const useAuthStore = create((set) => ({
 
   checkAuth: async () => {
     const token = localStorage.getItem("token");
-    console.log("checkWork");
     if (!token) {
       set({ isAuth: false });
       return;

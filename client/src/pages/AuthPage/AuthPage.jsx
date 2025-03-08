@@ -1,15 +1,22 @@
 import logo from "../../assets/logo.svg";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+import AuthForm from "../../components/AuthForm/AuthForm";
 
-import classes from "./Registration.module.css";
+import classes from "./AuthPage.module.css";
 
-function Registration() {
+function AuthPage() {
+  
   return (
     <div>
-      <div className={classes.Registration + ' h-screen contaier mx-auto flex items-center justify-center flex-col'}>
+      <div
+        className={
+          classes.Login +
+          " h-screen contaier mx-auto flex items-center justify-center flex-col"
+        }
+      >
         <img src={logo} alt="logo" />
-        <RegistrationForm />
+        <AuthForm />
       </div>
+      
       <p className="text-md text-gray-500 absolute bottom-8 left-8 opacity-3 font-medium">
         © 2025 Cloudy Диск
       </p>
@@ -23,4 +30,4 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default AuthPage;
