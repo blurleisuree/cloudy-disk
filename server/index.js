@@ -1,12 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const config = require("config");
+require("dotenv").config();
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const authRouter = require("./routes/auth.routes");
 
 const app = express();
-const PORT = config.get("serverPort");
+const PORT = process.env.PORT || 5000;
 
 app.use(corsMiddleware);
 app.use(express.json());
@@ -14,7 +14,7 @@ app.use("/api/auth", authRouter);
 
 const start = async () => {
   try {
-    const dbUrl = config.get("dbUrl");
+    const dbUrl = process.env.DATABASE_URL;
     console.log("Попытка подключения к базе данных:", dbUrl);
 
     await mongoose.connect(dbUrl);

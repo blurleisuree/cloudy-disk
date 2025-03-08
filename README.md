@@ -29,7 +29,7 @@ Cloudy Disk — это веб-приложение для хранения и у
 - **Frontend**:
   - `react`, `react-router`, `zustand`, `react-query`, `tailwindcss`.
 - **Backend**:
-  - `express`, `jsonwebtoken`, `bcrypt`, `cors`, `express-validator`, `mongoose`, `nodemon`.
+  - `express`, `jsonwebtoken`, `bcrypt`, `cors`, `express-validator`, `mongoose`, `nodemon`, `helmet`
 
 Для детального обзора установите проект и изучите файлы `package.json`.
 

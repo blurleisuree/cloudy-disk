@@ -13,7 +13,7 @@ import LoaderPage from "../components/LoaderPage/LoaderPage";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
-  const loading = useAuthStore((state) => state.loading);
+  const loading = useAuthStore((state) => state.laoding);
 
   useEffect(() => {
     const verifyAuth = async () => {

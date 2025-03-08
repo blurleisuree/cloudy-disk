@@ -1,7 +1,6 @@
 const Router = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const config = require("config");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
 const router = new Router();
@@ -57,7 +56,7 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
     });
     return res.json({
@@ -83,7 +82,7 @@ router.get("/me", async (req, res) => {
       return res.status(401).json({ message: "No token provided" });
     }
 
-    const decoded = jwt.verify(token, config.get("secretKey"));
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
     const user = await User.findById(decoded.id);
 
     if (!user) {
