@@ -1,5 +1,5 @@
 import classes from "./AuthForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import useAuthStore from "../../store/authStore";
 
@@ -27,10 +27,24 @@ const schema = Yup.object().shape({
 });
 
 function AuthForm() {
-  const { login, registration } = useAuthStore();
+  const { login, registration, error } = useAuthStore();
 
-  const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [isLogin, setIsLogin] = useState(() => initIsLogin());
+  function initIsLogin() {
+    const storedValue = localStorage.getItem("isLogin");
+    return storedValue !== null ? storedValue === "true" : true;
+    // Если не пустое значение false : true
+  }
+
+  useEffect(() => {
+    localStorage.setItem("isLogin", isLogin.toString());
+  }, [isLogin]);
+
+  function toggleIsLogin() {
+    setIsLogin((prev) => !prev);
+  }
 
   const {
     register,
@@ -49,11 +63,14 @@ function AuthForm() {
         ? await login(data.email, data.password)
         : await registration(data.email, data.password);
     } catch (e) {
-      // console.error(e);
-      alert(e);
+      console.error(true);
     }
     reset();
   };
+
+  // useEffect(() => {
+  //   console.log(error);
+  // }, [error]);
 
   return (
     <form
@@ -96,7 +113,7 @@ function AuthForm() {
       </FormButton>
       <p
         className="block mt-4 underline underline-offset-2 text-secondary-color cursor-pointer"
-        onClick={() => setIsLogin(!isLogin)}
+        onClick={toggleIsLogin}
       >
         {isLogin ? "Еще не зарегистрированы?" : "Уже есть аккаунт?"}
       </p>
