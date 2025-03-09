@@ -21,7 +21,7 @@ const schema = Yup.object().shape({
     .max(12, "Пароль должен быть не более 12-ти символов")
     .required("Пароль обязателен")
     .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/,
+      /^(?=.*[A-Za-zА-Яа-яЁё])(?=.*\d)[A-Za-zА-Яа-яЁё\d]{5,}$/,
       "Пароль должен содержать минимум одну букву"
     ),
 });
@@ -29,8 +29,10 @@ const schema = Yup.object().shape({
 function AuthForm() {
   const { login, registration, error } = useAuthStore();
 
+  // Для инпута с паролем
   const [showPassword, setShowPassword] = useState(false);
 
+  // Переключение входа/регистрация
   const [isLogin, setIsLogin] = useState(() => initIsLogin());
   function initIsLogin() {
     const storedValue = localStorage.getItem("isLogin");
@@ -57,7 +59,7 @@ function AuthForm() {
   });
 
   const onSubmit = async (data) => {
-    alert(`Форма отправлена!`);
+    // alert(`Форма отправлена!`);
     try {
       isLogin
         ? await login(data.email, data.password)
@@ -68,9 +70,9 @@ function AuthForm() {
     reset();
   };
 
-  // useEffect(() => {
-  //   console.log(error);
-  // }, [error]);
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
   return (
     <form
@@ -107,6 +109,8 @@ function AuthForm() {
         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:rounded-sm active:rounded-sm"
       />
       <label className="ms-2 mt-1">Показать пароль</label>
+
+      {error && <p className="text-red-600 mt-2">{error}</p>}
 
       <FormButton type="submit">
         {isLogin ? "Войти" : "Зарегестрироваться"}
