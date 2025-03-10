@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-function Input({ label, type = "text", register, errors, name, placeholder }) {
+function Input({ label, type = "text", register = function() {}, errors, name, placeholder }) {
 
   return (
     <div className={classes.Input__wrapper + " mb-4"} htmlFor={name}>
