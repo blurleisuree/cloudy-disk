@@ -1,3 +1,4 @@
+import { Outlet } from "react-router";
 import logo from "../../assets/logo.svg";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
@@ -13,7 +14,7 @@ function AuthPage() {
         }
       >
         <img src={logo} alt="logo" />
-        <AuthForm />
+        <Outlet />
       </div>
 
       <p className="text-md text-gray-500 absolute bottom-8 left-8 opacity-3 font-medium">

@@ -32,6 +32,7 @@ const useAuthStore = create((set) => ({
       localStorage.setItem("token", data.token);
     } catch (e) {
       set({ error: e.message, loading: false });
+      throw e;
     }
   },
 
@@ -57,6 +58,7 @@ const useAuthStore = create((set) => ({
       set({ loading: false });
     } catch (e) {
       set({ error: e.message, loading: false });
+      throw e;
     }
   },
 
@@ -93,6 +95,53 @@ const useAuthStore = create((set) => ({
     } catch (e) {
       set({ error: e.message, loading: false, isAuth: false });
       localStorage.removeItem("token");
+      throw e;
+    }
+  },
+
+  sendCode: async (code, email) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/verify", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ code, email }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Verification failed");
+      }
+
+      set({ loading: false, isAuth: true });
+    } catch (e) {
+      set({ error: e.message, loading: false });
+      throw e;
+    }
+  },
+
+  resendCode: async (email) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/resend", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Resend Failed");
+      }
+
+      set({ loading: false });
+    } catch (e) {
+      set({ error: e.message, loading: false });
+      throw e;
     }
   },
 }));

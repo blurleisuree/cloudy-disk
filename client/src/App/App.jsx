@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import useAuthStore from "../store/authStore";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
+import AuthForm from "../components/AuthForm/AuthForm";
+import VerifyPage from "../pages/VerifyPage/VerifyPage";
 import Files from "../pages/Files/Files";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
@@ -25,20 +27,29 @@ function App() {
   if (loading) return <LoaderPage />;
 
   return (
+    <div className={classes.App}>
+      <Routes>
+        <Route element={<PublicRoute />}>
+          <Route element={<AuthPage />}>
+            <Route path="/auth" element={<AuthForm />} />
+            <Route path="/auth/verify" element={<VerifyPage />} />
+          </Route>
+        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/files" element={<Files />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/auth" replace />} />
+      </Routes>
+    </div>
+  );
+}
+
+function AppWrapper() {
+  return (
     <BrowserRouter>
-      <div className={classes.App}>
-        <Routes>
-          <Route element={<PublicRoute />}>
-            <Route path="/auth" element={<AuthPage />} />
-          </Route>
-          <Route element={<ProtectedRoute />}>
-            <Route path="/files" element={<Files />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/auth" replace />} />
-        </Routes>
-      </div>
+      <App />
     </BrowserRouter>
   );
 }
 
-export default App;
+export default AppWrapper;

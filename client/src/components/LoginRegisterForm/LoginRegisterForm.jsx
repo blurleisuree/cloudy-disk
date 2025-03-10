@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useAuthStore from "../../store/authStore";
 
+import { useNavigate } from "react-router";
+
 import Input from "../UI/Input/Input";
 import FormButton from "../UI/FormButton/FormButton";
 
@@ -24,8 +26,8 @@ const registerSchema = Yup.object().shape({
     ),
 });
 
-function LoginRegisterForm({ isLogin, toggleIsLogin, toggleIsVerify }) {
-  const { login, registration, error } = useAuthStore();
+function LoginRegisterForm({ isLogin, toggleIsLogin }) {
+  const { login, registration, error, loading } = useAuthStore();
 
   // Для инпута с паролем
   const [showPassword, setShowPassword] = useState(false);
@@ -40,26 +42,28 @@ function LoginRegisterForm({ isLogin, toggleIsLogin, toggleIsVerify }) {
     mode: "onBlur",
   });
 
+  const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-    //   isLogin
-    //     ? await login(data.email, data.password)
-    //     : await registration(data.email, data.password);
       if (isLogin) {
         await login(data.email, data.password);
       } else {
-        // await registration(data.email, data.password);
-        !error && toggleIsVerify(data.email);
+        await registration(data.email, data.password);
+        navigate("/auth/verify", { state: data.email });
       }
     } catch (e) {
-      console.error(true);
+      console.log(e);
+      // В случае если пользователь с неподтвержденной почтой
+      if (e.message === "Подтвердите email для входа") {
+        navigate("/auth/verify", { state: data.email });
+      }
     }
     reset();
   };
 
   return (
     <form
-      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-1/6 self-center"
+      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-1/5 self-center"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h3 className="font-medium text-2xl mb-6">
@@ -92,7 +96,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin, toggleIsVerify }) {
 
       {error && <p className="text-red-600 mt-2">{error}</p>}
 
-      <FormButton type="submit">
+      <FormButton type="submit" disabled={loading}>
         {isLogin ? "Войти" : "Зарегестрироваться"}
       </FormButton>
       <p
@@ -106,3 +110,5 @@ function LoginRegisterForm({ isLogin, toggleIsLogin, toggleIsVerify }) {
 }
 
 export default LoginRegisterForm;
+
+//TODO Сделать переиспользуемую форму и туда вынести пол компонента
