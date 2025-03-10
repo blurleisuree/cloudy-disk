@@ -105,7 +105,7 @@ router.post("/verify", async (req, res) => {
   }
 });
 
-router.post("/resend", async (req, res) => {
+router.post("/resend-code", async (req, res) => {
   try {
     const { email } = req.body;
 
@@ -181,6 +181,17 @@ router.post("/login", async (req, res) => {
     res.send({ message: "Server error", e });
   }
 });
+
+// router.post("/forgot-password", async (req, res) => {
+//   try {
+//     const { email } = req.body; // Те данные которые приходят на сервер
+
+//     const user = await User.findOne({ email }); // Ищем пользователя по email
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" }); // Если нет юзера ответ erorr
+//     }
+// });
+
 
 router.get("/me", async (req, res) => {
   try {
