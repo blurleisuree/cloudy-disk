@@ -27,9 +27,9 @@ Cloudy Disk — это веб-приложение для хранения и у
 Полный список зависимостей указан в файлах `package.json` (для клиента и сервера). Основные библиотеки включают:
 
 - **Frontend**:
-  - `react`, `react-router`, `zustand`, `react-query`, `tailwindcss`.
+  - `react`, `react-router`, `zustand`, `react-query`, `tailwindcss`, `yup`, `react-hook-form`, `eslint`
 - **Backend**:
-  - `express`, `jsonwebtoken`, `bcrypt`, `cors`, `express-validator`, `mongoose`, `nodemon`, `helmet`
+  - `express`, `jsonwebtoken`, `bcrypt`, `cors`, `express-validator`, `mongoose`, `nodemon`, `helmet`, `nodemailer`, `config`
 
 Для детального обзора установите проект и изучите файлы `package.json`.
 
