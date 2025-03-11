@@ -41,7 +41,7 @@ const useAuthStore = create((set) => ({
   registration: async (email, password) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`${API_URL}api/auth/login/registration`, {
+      const response = await fetch(`${API_URL}api/auth/registration`, {
         method: "POST",
         headers: {
           "Content-type": "application/json;charset=utf-8",
