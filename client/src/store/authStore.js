@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { API_URL } from "../apiConfig";
+const localUrl = "http://localhost:5000/api/auth/";
 
 const useAuthStore = create((set) => ({
   user: null,
@@ -10,7 +12,7 @@ const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ loading: true, error: null });
     try {
-      const responce = await fetch("http://localhost:5000/api/auth/login", {
+      const responce = await fetch(`${API_URL}api/auth/login`, {
         method: "POST",
         headers: {
           "Content-type": "application/json;charset=utf-8",
@@ -39,16 +41,13 @@ const useAuthStore = create((set) => ({
   registration: async (email, password) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/auth/registration",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json;charset=utf-8",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(`${API_URL}api/auth/login/registration`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ email, password }),
+      });
       const data = await response.json();
 
       if (!response.ok) {
@@ -76,7 +75,7 @@ const useAuthStore = create((set) => ({
 
     set({ loading: true });
     try {
-      const response = await fetch("http://localhost:5000/api/auth/me", {
+      const response = await fetch(`${API_URL}api/auth/me`, {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -102,7 +101,7 @@ const useAuthStore = create((set) => ({
   sendCode: async (code, email) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch("http://localhost:5000/api/auth/verify", {
+      const response = await fetch(`${API_URL}api/auth/verify`, {
         method: "POST",
         headers: {
           "Content-type": "application/json;charset=utf-8",
@@ -125,7 +124,7 @@ const useAuthStore = create((set) => ({
   resendCode: async (email) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch("http://localhost:5000/api/auth/resend", {
+      const response = await fetch(`${API_URL}api/auth/resend-code`, {
         method: "POST",
         headers: {
           "Content-type": "application/json;charset=utf-8",
