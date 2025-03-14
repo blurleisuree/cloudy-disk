@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo_text.svg";
 import AuthForm from "../../components/AuthForm/AuthForm";
 
 import classes from "./AuthPage.module.css";
@@ -13,7 +13,7 @@ function AuthPage() {
           " h-screen contaier mx-auto flex items-center justify-center flex-col"
         }
       >
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" className="mb-10" />
         <Outlet />
       </div>
 
