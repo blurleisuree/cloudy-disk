@@ -98,7 +98,7 @@ const useAuthStore = create((set) => ({
     }
   },
 
-  sendCode: async (code, email) => {
+  verify: async (code, email) => {
     set({ loading: true, error: null });
     try {
       const response = await fetch(`${API_URL}api/auth/verify`, {
@@ -114,7 +114,14 @@ const useAuthStore = create((set) => ({
         throw new Error(data.message || "Verification failed");
       }
 
-      set({ loading: false, isAuth: true });
+      set({
+        user: { userId: data.userId, email },
+        token: data.token,
+        isAuth: true,
+        loading: false,
+      });
+
+      localStorage.setItem("token", data.token);
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;
@@ -182,7 +189,7 @@ const useAuthStore = create((set) => ({
       if (!response.ok) {
         throw new Error(data.message || "Password reset failed");
       }
-      
+
       set({ loading: false });
     } catch (e) {
       set({ error: e.message, loading: false });

@@ -32,11 +32,11 @@ function VerifyPage() {
 
   const navigate = useNavigate();
 
-  const { error, sendCode, resendCode } = useAuthStore();
+  const { error, verify, resendCode } = useAuthStore();
 
   const submitCode = async (data) => {
     try {
-      await sendCode(data.code, email);
+      await verify(data.code, email);
     } catch (e) {
       console.log(e);
     }

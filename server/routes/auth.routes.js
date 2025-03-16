@@ -99,7 +99,20 @@ router.post("/verify", async (req, res) => {
     user.verificationCode = null; // Удаляем код
     await user.save();
 
-    res.json({ message: "Почта успешно подтверждена" });
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
+    return res.json({
+      message: "Почта успешно подтверждена",
+      token, 
+      user: {
+        id: user.id,
+        email: user.email,
+        diskSpace: user.diskSpace,
+        usedSpace: user.usedSpace,
+        avatar: user.avatar,
+      },
+    });
   } catch {
     console.log(e);
     res.send({ message: "Ошибка отправки кода", e });
