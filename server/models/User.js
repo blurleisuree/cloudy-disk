@@ -6,6 +6,8 @@ const User = new Schema({
     isVerified: {type:Boolean, default: false},
     verificationCode: { type: String },
     verificationExpires: { type: Date, expires: 600 },
+    resetCode: {type: String},
+    resetExpires: { type: Date, expires: 600 },
     diskSpace: {type: Number, default: 1024*3*10},
     usedSpace: {type: Number, default: 0},
     avatar: {type: String},

@@ -80,6 +80,7 @@ router.post(
   }
 );
 
+// Подтверждение почты
 router.post("/verify", async (req, res) => {
   try {
     const { code, email } = req.body;
@@ -105,6 +106,7 @@ router.post("/verify", async (req, res) => {
   }
 });
 
+// Отправить код заново
 router.post("/resend-code", async (req, res) => {
   try {
     const { email } = req.body;
@@ -144,6 +146,7 @@ router.post("/resend-code", async (req, res) => {
   }
 });
 
+// Вход
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body; // Те данные которые приходят на сервер
@@ -182,17 +185,73 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// router.post("/forgot-password", async (req, res) => {
-//   try {
-//     const { email } = req.body; // Те данные которые приходят на сервер
+// Отправка кода для сброса пароля
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { email } = req.body;
 
-//     const user = await User.findOne({ email }); // Ищем пользователя по email
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" }); // Если нет юзера ответ erorr
-//     }
-// });
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
+    const newCode = generateCode();
+    user.resetCode = newCode;
+    user.resetExpires = new Date(Date.now() + 10 * 60 * 1000);
+    await user.save();
 
+    await transporter.sendMail({
+      from: `cloudydisk.com ${process.env.SMTP_EMAIL}`,
+      to: email,
+      subject: "Сброс пароля",
+      html: `
+      <div style="font-family: Arial, sans-serif; text-align: center;">
+        <h2 style="color: #333;">Сброс пароля</h2>
+        <p>Ваш код подтверждения для сброса пароля:</p>
+        <h3 style="color: #007bff;">${newCode}</h3>
+        <p>Введите этот код в приложении, чтобы сбросить пароль. Код действителен 10 минут.</p>
+        <p>Если вы не запрашивали сброс пароля, просто проигнорируйте это письмо.</p>
+        <hr/>
+        <p style="font-size: 12px; color: #888;">Cloudy Disk, 2025</p>
+      </div>
+    `,
+    });
+
+    res.json({ message: "Код для сброса пароля отправлен" });
+  } catch (e) {
+    console.log(e);
+    res.send({ message: "Ошибка отправки кода", e });
+  }
+});
+
+// Сброс пароля
+router.post("/reset-password", async (req, res) => {
+  try {
+    const { email, resetCode, newPassword } = req.body;
+
+    const user = await User.findOne({
+      email,
+      resetCode,
+      resetExpires: { $gt: Date.now() }, // Проверяем, не истёк ли код
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Неверный или истёкший код" });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 8);
+    user.resetCode = undefined;
+    user.resetCodeExpires = undefined;
+    await user.save();
+
+    res.json({ message: "Пароль успешно обновлён" });
+  } catch (e) {
+    console.log(e);
+    res.send({ message: "Ошибка сброса пароля", e });
+  }
+});
+
+// Проверка аутентификации
 router.get("/me", async (req, res) => {
   try {
     const token = req.headers.authorization?.split(" ")[1];
