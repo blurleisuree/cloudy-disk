@@ -93,6 +93,12 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:rounded-sm active:rounded-sm"
       />
       <label className="ms-2 mt-1">Показать пароль</label>
+      <p
+        className="mt-2 text-primary-color cursor-pointer underline"
+        onClick={() => navigate("/auth/forgot-password")}
+      >
+        Забыли пароль?
+      </p>
 
       {error && <p className="text-red-600 mt-2">{error}</p>}
 

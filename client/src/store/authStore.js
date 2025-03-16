@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { API_URL } from "../apiConfig";
-const localUrl = "http://localhost:5000/api/auth/";
+const localUrl = "http://localhost:5000/";
 
 const useAuthStore = create((set) => ({
   user: null,
@@ -137,6 +137,52 @@ const useAuthStore = create((set) => ({
         throw new Error(data.message || "Resend Failed");
       }
 
+      set({ loading: false });
+    } catch (e) {
+      set({ error: e.message, loading: false });
+      throw e;
+    }
+  },
+
+  forgotPassword: async (email) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch(`${localUrl}api/auth/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ email }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Password reset failed");
+      }
+
+      set({ loading: false });
+    } catch (e) {
+      set({ error: e.message, loading: false });
+      throw e;
+    }
+  },
+
+  resetPassword: async (email, resetCode, newPassword) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await fetch(`${localUrl}api/auth/reset-password`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({ email, resetCode, newPassword }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Password reset failed");
+      }
+      
       set({ loading: false });
     } catch (e) {
       set({ error: e.message, loading: false });

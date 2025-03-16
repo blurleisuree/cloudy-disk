@@ -228,6 +228,7 @@ router.post("/forgot-password", async (req, res) => {
 router.post("/reset-password", async (req, res) => {
   try {
     const { email, resetCode, newPassword } = req.body;
+    console.log(email, resetCode, newPassword)
 
     const user = await User.findOne({
       email,

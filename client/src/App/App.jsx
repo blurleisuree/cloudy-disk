@@ -6,7 +6,8 @@ import useAuthStore from "../store/authStore";
 import AuthPage from "../pages/AuthPage/AuthPage";
 import AuthForm from "../components/AuthForm/AuthForm";
 import VerifyForm from "../components/VerifyForm/VerifyForm";
-// import ForgotForm from "../components/ForgotForm/ForgotForm";
+import ForgotForm from "../components/ForgotForm/ForgotForm";
+import ResetPassForm from "../components/ResetPassForm/ResetPassForm.jsx";
 import Files from "../pages/Files/Files";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
@@ -34,7 +35,8 @@ function App() {
           <Route element={<AuthPage />}>
             <Route path="/auth" element={<AuthForm />} />
             <Route path="/auth/verify" element={<VerifyForm />} />
-            {/* <Route path="/auth/forgot-password" element={<ForgotForm />} /> */}
+            <Route path="/auth/forgot-password" element={<ForgotForm />} />
+            <Route path="/auth/reset-password" element={<ResetPassForm />} />
           </Route>
         </Route>
         <Route element={<ProtectedRoute />}>
