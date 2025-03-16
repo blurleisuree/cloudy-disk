@@ -4,8 +4,8 @@ import { useState } from "react";
 import useAuthStore from "../../store/authStore";
 import useStore from "../../store/store";
 
-import Input from "../../components/UI/Input/Input";
-import FormButton from "../../components/UI/FormButton/FormButton";
+import Input from "../UI/Input/Input";
+import FormButton from "../UI/FormButton/FormButton";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -42,7 +42,6 @@ function VerifyPage() {
     }
   };
 
-  //   const [codeIsResend, setCodeIsResend] = useState(false);
   const { codeIsResend, setCodeIsResend } = useStore();
   const getNewCode = async () => {
     try {

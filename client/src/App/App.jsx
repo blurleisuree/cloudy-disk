@@ -5,7 +5,8 @@ import useAuthStore from "../store/authStore";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
 import AuthForm from "../components/AuthForm/AuthForm";
-import VerifyPage from "../pages/VerifyPage/VerifyPage";
+import VerifyForm from "../components/VerifyForm/VerifyForm";
+// import ForgotForm from "../components/ForgotForm/ForgotForm";
 import Files from "../pages/Files/Files";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
@@ -32,7 +33,8 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route element={<AuthPage />}>
             <Route path="/auth" element={<AuthForm />} />
-            <Route path="/auth/verify" element={<VerifyPage />} />
+            <Route path="/auth/verify" element={<VerifyForm />} />
+            {/* <Route path="/auth/forgot-password" element={<ForgotForm />} /> */}
           </Route>
         </Route>
         <Route element={<ProtectedRoute />}>
