@@ -35,7 +35,7 @@ function ResetPassForm() {
     mode: "onBlur",
   });
 
-  const { error, resetPassword, resendCode } = useAuthStore();
+  const { error, resetPassword, forgotPassword } = useAuthStore();
   const navigate = useNavigate();
   const email = useLocation().state;
 
@@ -53,7 +53,7 @@ function ResetPassForm() {
   const { codeIsResend, setCodeIsResend } = useStore();
   const getNewCode = async () => {
     try {
-      await resendCode(email);
+      await forgotPassword(email);
       setCodeIsResend(true);
     } catch (e) {
       console.log(e);
@@ -103,7 +103,7 @@ function ResetPassForm() {
             className="text-primary-color cursor-pointer"
             onClick={getNewCode}
           >
-            Повторно отправить письмо с подтверждением.
+            Повторно отправить письмо с кодом.
           </span>
         </p>
       )}
