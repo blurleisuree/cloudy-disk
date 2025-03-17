@@ -22,7 +22,7 @@ function AuthPage() {
       </p>
       <a
         href="#"
-        className="text-md text-gray-500 absolute bottom-8 right-8 opacity-3 font-medium underline underline-offset-2"
+        className="text-md text-gray-500 absolute bottom-8 right-8 opacity-3 font-medium underline underline-offset-2 hidden sm:block"
       >
         Политика конфиденциальности
       </a>

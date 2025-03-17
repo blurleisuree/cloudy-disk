@@ -54,7 +54,7 @@ function VerifyPage() {
 
   return (
     <form
-      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-1/5 self-center"
+      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-80 self-center"
       onSubmit={handleSubmit(submitCode)}
     >
       <h3 className="font-medium text-2xl mb-6">
