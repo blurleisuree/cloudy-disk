@@ -22,7 +22,7 @@ const registerSchema = Yup.object().shape({
     .required("Пароль обязателен")
     .matches(
       /^(?=.*[A-Za-zА-Яа-яЁё])(?=.*\d)[A-Za-zА-Яа-яЁё\d]{5,}$/,
-      "Пароль должен содержать минимум одну букву"
+      "Пароль должен состоять из букв и цифр"
     ),
 });
 
@@ -116,5 +116,3 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
 }
 
 export default LoginRegisterForm;
-
-//TODO Сделать переиспользуемую форму и туда вынести пол компонента

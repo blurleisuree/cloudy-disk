@@ -21,7 +21,7 @@ const resetSchema = Yup.object().shape({
     .required("Пароль обязателен")
     .matches(
       /^(?=.*[A-Za-zА-Яа-яЁё])(?=.*\d)[A-Za-zА-Яа-яЁё\d]{5,}$/,
-      "Пароль должен содержать минимум одну букву"
+      "Пароль должен состоять из букв и цифр"
     ),
 });
 
@@ -95,7 +95,10 @@ function ResetPassForm() {
       <label className="ms-2 mt-1">Показать пароль</label>
 
       {codeIsResend ? (
-        <p className="mt-6"><span className="text-primary-color">Новый код отправлен!</span> Проверьте почту</p>
+        <p className="mt-6">
+          <span className="text-primary-color">Новый код отправлен!</span>{" "}
+          Проверьте почту
+        </p>
       ) : (
         <p className="mt-6">
           Пожалуйста, проверьте папку со спамом.{" "}
