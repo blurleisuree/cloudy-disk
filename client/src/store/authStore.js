@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { API_URL } from "../apiConfig";
-const localUrl = "http://localhost:5000/";
 
 const useAuthStore = create((set) => ({
   user: null,

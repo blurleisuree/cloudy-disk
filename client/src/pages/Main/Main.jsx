@@ -6,10 +6,12 @@ import Header from "../../components/Header/Header";
 
 function Main() {
   return (
-    <div>
+    <div className="flex">
       <SideBar />
-      {/* <Header /> */}
-      <Outlet />
+      <div className="w-full h-screen">
+        <Header />
+        <Outlet />
+      </div>
     </div>
   );
 }
