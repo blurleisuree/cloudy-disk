@@ -11,6 +11,6 @@ function PublicRoute() {
     return <LoaderPage />;
   }
 
-  return !isAuth ? <Outlet /> : <Navigate to="/files" replace />;
+  return !isAuth ? <Outlet /> : <Navigate to="/" replace />;
 }
 export default PublicRoute;

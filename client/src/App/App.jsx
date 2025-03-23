@@ -8,9 +8,11 @@ import AuthForm from "../components/AuthForm/AuthForm";
 import VerifyForm from "../components/VerifyForm/VerifyForm";
 import ForgotForm from "../components/ForgotForm/ForgotForm";
 import ResetPassForm from "../components/ResetPassForm/ResetPassForm.jsx";
-import Files from "../pages/Files/Files";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
+
+import Files from "../pages/Files/Files";
+import Main from "../pages/Main/Main"
 
 import { useEffect } from "react";
 import LoaderPage from "../components/LoaderPage/LoaderPage";
@@ -40,9 +42,11 @@ function App() {
           </Route>
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/files" element={<Files />} />
+          <Route path="/" element={<Main />} >
+            <Route path="files" element={<Files />} />
+          </Route>
         </Route>
-        <Route path="*" element={<Navigate to="/auth" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );
