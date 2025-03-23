@@ -10,6 +10,7 @@ function PopUpMenu({ arr, isOpen }) {
           alt={elem.alt}
           text={elem.text}
           src={elem.src}
+          onClick={elem.onClick}
         />;
       })}
     </div>

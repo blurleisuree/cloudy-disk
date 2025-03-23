@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
-function SideBarElem({ text, src, link, alt }) {
+function SideBarElem({ text, src, link, alt, onClick }) {
   const navigate = useNavigate();
 
-  function onClick() {
+  function onLocalClick() {
     navigate(link);
   }
 
@@ -18,7 +18,7 @@ function SideBarElem({ text, src, link, alt }) {
 
   return (
     <div
-      onClick={onClick}
+      onClick={onClick ? onClick : onLocalClick}
       className={`flex items-center py-4 px-4 font-medium cursor-pointer hover:bg-blue-100 transition ${
         isActive ? "bg-blue-100 text-primary-color" : "bg-transparent"
       }`}
