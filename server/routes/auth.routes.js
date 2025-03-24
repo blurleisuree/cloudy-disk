@@ -47,11 +47,13 @@ router.post(
       const hashPassword = await bcrypt.hash(password, 8);
       const verificationCode = generateCode();
 
+      const verificationExpiresTime = new Date(Date.now());
       const user = new User({
         email,
         password: hashPassword,
         isVerified: false,
         verificationCode: verificationCode,
+        verificationExpires: verificationExpiresTime,
       });
       await user.save();
 
@@ -90,6 +92,12 @@ router.post("/verify", async (req, res) => {
       return res.status(404).json({ message: "Wrong email" }); // Если нет юзера по этой почте
     }
 
+    const now = new Date();
+    const expiresAt = new Date(user.verificationExpires.getTime() + 600 * 1000); // Добавляем 10 минут к verificationExpires
+    if (now > expiresAt) {
+      return res.status(400).json({ message: "Verification code has expired" });
+    }
+
     const isCodeValid = code === user.verificationCode;
     if (!isCodeValid) {
       return res.status(404).json({ message: "Invalid code" });
@@ -97,6 +105,7 @@ router.post("/verify", async (req, res) => {
 
     user.isVerified = true;
     user.verificationCode = null; // Удаляем код
+    user.verificationExpires = null;
     await user.save();
 
     const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
@@ -104,7 +113,7 @@ router.post("/verify", async (req, res) => {
     });
     return res.json({
       message: "Почта успешно подтверждена",
-      token, 
+      token,
       user: {
         id: user.id,
         email: user.email,
@@ -210,7 +219,6 @@ router.post("/forgot-password", async (req, res) => {
 
     const newCode = generateCode();
     user.resetCode = newCode;
-    user.resetExpires = new Date(Date.now() + 10 * 60 * 1000);
     await user.save();
 
     await transporter.sendMail({
@@ -254,7 +262,6 @@ router.post("/reset-password", async (req, res) => {
 
     user.password = await bcrypt.hash(newPassword, 8);
     user.resetCode = undefined;
-    user.resetCodeExpires = undefined;
     await user.save();
 
     res.json({ message: "Пароль успешно обновлён" });
