@@ -42,6 +42,7 @@ function ResetPassForm() {
   const submitPassword = async (data) => {
     try {
       await resetPassword(email, data.code, data.password);
+      navigate("/auth", { state: { isChanged: true } });
     } catch (e) {
       console.log(e);
     }
