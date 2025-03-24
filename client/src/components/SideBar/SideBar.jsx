@@ -1,12 +1,9 @@
-import classes from "./SideBar.module.css";
-
 import Logo from "../UI/Logo/Logo";
-
 import AddFileBtn from "../UI/AddFileBtn/AddFileBtn";
 import SideBarElem from "../UI/SideBarElem/SideBarElem";
 
-import filesSvg from '../../assets/files.svg'
-import starSvg from '../../assets/star.svg'
+import filesSvg from "../../assets/files.svg";
+import starSvg from "../../assets/star.svg";
 
 function SideBar() {
   return (
@@ -14,7 +11,12 @@ function SideBar() {
       <Logo className="mx-4" />
       <AddFileBtn />
       <SideBarElem alt="files" src={filesSvg} link="/files" text="Файлы" />
-      <SideBarElem alt="favourite" src={starSvg} link="/favourite" text="Избранное" />
+      <SideBarElem
+        alt="favourite"
+        src={starSvg}
+        link="/favourite"
+        text="Избранное"
+      />
     </div>
   );
 }

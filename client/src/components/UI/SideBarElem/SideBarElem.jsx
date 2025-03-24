@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 function SideBarElem({ text, src, link, alt, onClick }) {
   const navigate = useNavigate();
 
+  // Для выхода в popupmenu
   function onLocalClick() {
     navigate(link);
   }
@@ -11,9 +12,7 @@ function SideBarElem({ text, src, link, alt, onClick }) {
   const [isActive, setIsActive] = useState(false);
   const url = useLocation().pathname;
   useEffect(() => {
-    if (url === "/" + alt) {
-      setIsActive(true);
-    }
+    setIsActive(url === "/" + alt);
   }, [url, alt]);
 
   return (

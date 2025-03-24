@@ -19,8 +19,8 @@ function Header() {
   }
 
   const menuElems = [
-    { alt: "settings", text: "Настройки", src: settingsSvg },
-    { alt: "profile", text: "Профиль", src: profileSvg },
+    { alt: "settings", text: "Настройки", src: settingsSvg, link: '/profile/settings' },
+    { alt: "profile", text: "Профиль", src: profileSvg, link: '/profile/details' },
     { alt: "exitBtn", text: "Выйти из аккаунта", src: exitSvg, onClick: toggleModal },
   ];
 
@@ -37,7 +37,7 @@ function Header() {
         className="w-12 cursor-pointer transition active:opacity-35"
         onClick={toggleMenu}
       />
-      <PopUpMenu arr={menuElems} isOpen={isOpen} toggleModal={toggleModal}/>
+      <PopUpMenu arr={menuElems} isOpen={isOpen} toggleModal={toggleModal} toggleMenu={toggleMenu}/>
       {modalIsActive && <Modal closeModal={toggleModal} logout={logout} />}
     </div>
   );

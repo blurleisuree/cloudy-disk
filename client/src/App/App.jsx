@@ -1,5 +1,6 @@
 import classes from "./App.module.css";
 
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import useAuthStore from "../store/authStore";
 
@@ -12,10 +13,12 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
 
 import Files from "../pages/Files/Files";
-import Main from "../pages/Main/Main"
+import Main from "../pages/Main/Main";
 
-import { useEffect } from "react";
 import LoaderPage from "../components/LoaderPage/LoaderPage";
+import Profile from "../pages/Profile/Profile.jsx";
+import Settings from "../pages/Profile/Settings/Settings.jsx";
+import Details from "../pages/Profile/Details/Details.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -42,8 +45,14 @@ function App() {
           </Route>
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Main />} >
+          <Route path="/" element={<Main />}>
+            <Route index element={<Navigate to="files" replace />} />
             <Route path="files" element={<Files />} />
+            <Route path="profile" element={<Profile />}>
+              <Route index element={<Navigate to="settings" replace />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="details" element={<Details />} />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
