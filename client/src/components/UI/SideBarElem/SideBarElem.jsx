@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
-function SideBarElem({ text, src, link, alt, onClick }) {
+function SideBarElem({ text, src, link, alt }) {
   const navigate = useNavigate();
 
-  // Для выхода в popupmenu
-  function onLocalClick() {
+  function handleClick() {
     navigate(link);
   }
 
@@ -17,7 +16,7 @@ function SideBarElem({ text, src, link, alt, onClick }) {
 
   return (
     <div
-      onClick={onClick ? onClick : onLocalClick}
+      onClick={handleClick}
       className={`flex items-center py-4 px-4 font-medium cursor-pointer hover:bg-blue-100 transition ${
         isActive ? "bg-blue-100 text-primary-color" : "bg-transparent"
       }`}

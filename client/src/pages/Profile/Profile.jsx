@@ -10,7 +10,9 @@ function Profile() {
   return (
     <div>
       <Tabs elems={tabsElems} />
-      <Outlet />
+      <div className="p-10">
+        <Outlet />
+      </div>
     </div>
   );
 }

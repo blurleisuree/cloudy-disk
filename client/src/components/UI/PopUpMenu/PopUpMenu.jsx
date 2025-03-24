@@ -1,37 +1,44 @@
-import SideBarElem from "../SideBarElem/SideBarElem";
+import PopUpMenuElem from "../PopUpMenuElem/PopUpMenuElem";
 import classes from "./PopUpMenu.module.css";
 
-function PopUpMenu({ arr, isOpen, toggleMenu }) {
+import usePopUpMenuStore from "../../../store/popUpMenuStore";
+
+function PopUpMenu({ triggerElement, menuItems }) {
+  const { anchorEl, menuItems: items, open, close } = usePopUpMenuStore();
+
+  const handleClick = (event) => {
+    open(event.currentTarget, menuItems);
+  };
+
+  const handleClose = () => {
+    close();
+  };
+
   return (
-    <>
-      <div
-        className={`z-20 absolute w-fit mt-28 bg-white rounded-lg py-4 ${
-          isOpen ? "block" : "hidden"
-        } ${classes.popUp}`}
-      >
-        {arr.map((elem) => {
-          return (
-            <SideBarElem
-              key={elem.src}
-              alt={elem.alt}
-              text={elem.text}
-              src={elem.src}
-              link={elem.link}
-              onClick={elem.onClick}
-              toggleMenu={toggleMenu}
-            />
-          );
-        })}
-      </div>
-      <div
-        onClick={toggleMenu}
-        className={`absolute z-10 w-screen h-screen top-0 left-0 ${
-          isOpen ? "block" : "hidden"
-        }`}
-      ></div>
-    </>
+    <div className="relative h-min">
+      <div onClick={handleClick}>{triggerElement}</div>
+
+      {anchorEl && items.length > 0 && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={handleClose} />
+
+          <div
+            className={`block absolute right-0 mt-5 py-4 w-max bg-white rounded-lg shadow-lg z-50 ${classes.popup}`}
+          >
+            {items.map((item, index) => (
+              <PopUpMenuElem
+                key={index + item.text}
+                text={item.text}
+                src={item.src}
+                alt={item.alt}
+                onClick={item.onClick}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
 export default PopUpMenu;
-// TODO Переделать этот ужас + при клике по элементу меню закрывать его
