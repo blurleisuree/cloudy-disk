@@ -4,9 +4,9 @@ import { API_URL } from "../apiConfig";
 const useAuthStore = create((set) => ({
   user: null,
   token: null,
+  loading: true,
   isAuth: false,
   error: null,
-  loading: false,
 
   login: async (email, password) => {
     set({ loading: true, error: null });
@@ -68,7 +68,7 @@ const useAuthStore = create((set) => ({
   checkAuth: async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      set({ isAuth: false });
+      set({ isAuth: false, loading: false });
       return;
     }
 
