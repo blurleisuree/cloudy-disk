@@ -10,7 +10,7 @@ function Profile() {
   return (
     <div>
       <Tabs elems={tabsElems} />
-      <div className="p-10">
+      <div className="p-10 flex">
         <Outlet />
       </div>
     </div>

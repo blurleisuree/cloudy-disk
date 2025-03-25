@@ -11,7 +11,7 @@ function TabsElem({ name, link, isActive }) {
 
   return (
     <div
-      className={`cursor-pointer py-3 px-5 ${
+      className={`cursor-pointer py-3 px-5 font-medium ${
         isActive ? "border-b-2 border-primary-color text-primary-color" : "bg-transparent"
       }`}
       onClick={handleClick(link)}

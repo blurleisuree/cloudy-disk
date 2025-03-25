@@ -7,8 +7,8 @@ import starSvg from "../../assets/star.svg";
 
 function SideBar() {
   return (
-    <div className="w-64 border-r border-gray-200 h-screen py-6">
-      <Logo className="mx-4" />
+    <div className="w-fit border-r border-gray-200 h-screen py-6">
+      <Logo className="mx-8 mb-4 h-24 max-w-48" />
       <AddFileBtn />
       <SideBarElem alt="files" src={filesSvg} link="/files" text="Файлы" />
       <SideBarElem

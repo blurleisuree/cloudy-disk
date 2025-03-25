@@ -1,0 +1,8 @@
+.addFileBtn {
+  background: rgb(175, 43, 191);
+  background: linear-gradient(
+    200deg,
+    rgba(175, 43, 191, 1) 0%,
+    rgba(74, 144, 226, 1) 100%
+  );
+}
