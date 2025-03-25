@@ -10,7 +10,9 @@ function Main() {
       <SideBar />
       <div className="w-full h-screen">
         <Header />
-        <Outlet />
+        <div className="py-8">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
