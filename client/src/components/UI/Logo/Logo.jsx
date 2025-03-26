@@ -1,17 +1,7 @@
-import React from 'react'
+import logoLink from "../../../assets/logo_cloudy.svg";
 
-import classes from './Logo.module.css';
-
-import logoLink from '../../../assets/logo_cloudy.svg'
-
-function Logo({className}) {
-  return (
-    <img 
-    className={className}
-        alt='Logo'
-        src={logoLink}
-    />
-  )
+function Logo({ className }) {
+  return <img className={className} alt="Logo" src={logoLink} />;
 }
 
-export default Logo
+export default Logo;

@@ -19,6 +19,7 @@ import LoaderPage from "../components/LoaderPage/LoaderPage";
 import Profile from "../pages/Profile/Profile.jsx";
 import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
+import Favourite from '../pages/Favourite/Favourite.jsx'
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -48,6 +49,7 @@ function App() {
           <Route path="/" element={<Main />}>
             <Route index element={<Navigate to="files" replace />} />
             <Route path="files" element={<Files />} />
+            <Route path="favourite" element={<Favourite />} />
             <Route path="profile" element={<Profile />}>
               <Route index element={<Navigate to="settings" replace />} />
               <Route path="settings" element={<Settings />} />
