@@ -1,5 +1,5 @@
 import SearchBar from "../UI/SearchBar/SearchBar";
-import ProfileBtn from "../ProfileBtn/ProfileBtn";
+import ProfileBtn from "../UI/ProfileBtn/ProfileBtn";
 import PopUpMenu from "../UI/PopUpMenu/PopUpMenu";
 
 import settingsSvg from "../../assets/settings.svg";
@@ -15,20 +15,20 @@ function Header() {
   const toggleModal = useExitModalStore((state) => state.toggleModal);
   const toggleMenu = usePopUpMenuStore((state) => state.toggleMenu);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const menuItems = [
     {
       alt: "settings",
       text: "Настройки",
       src: settingsSvg,
-      onClick: () => navigate('/profile/settings'),
+      onClick: () => navigate("/profile/settings"),
     },
     {
       alt: "profile",
       text: "Профиль",
       src: profileSvg,
-      onClick: () => navigate('/profile/details'),
+      onClick: () => navigate("/profile/details"),
     },
     {
       alt: "exitBtn",
@@ -46,10 +46,9 @@ function Header() {
   );
 
   return (
-    // <div className="h-28 border-b w-full flex py-4 px-12 flex-row items-center">
     <div className="h-28 w-full flex py-4 px-12 border-b  flex-row items-center justify-between">
       <SearchBar />
-      <PopUpMenu menuItems={menuItems} triggerElement={triggerElement}/>
+      <PopUpMenu menuItems={menuItems} triggerElement={triggerElement} />
       <Modal />
     </div>
   );
