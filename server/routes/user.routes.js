@@ -66,7 +66,7 @@ router.post("/avatar", authMiddleware, uploadMiddleware, async (req, res) => {
     user.avatar = dataUri;
     await user.save();
 
-    return res.json({ message: "Фото загружено", avatar: user.avatar });
+    return res.json({ message: "Фото успешно загружено", avatar: user.avatar });
   } catch (e) {
     if (e.name === "JsonWebTokenError" || e.name === "TokenExpiredError") {
       return res.status(401).json({ message: "Invalid or expired token" });

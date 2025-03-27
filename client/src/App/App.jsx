@@ -20,6 +20,7 @@ import Profile from "../pages/Profile/Profile.jsx";
 import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
 import Favourite from '../pages/Favourite/Favourite.jsx'
+import Message from "../components/Message/Message.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <div className={classes.App}>
+      <Message />
       <Routes>
         <Route element={<PublicRoute />}>
           <Route element={<AuthPage />}>

@@ -1,5 +1,6 @@
 import useAuthStore from "../../../store/authStore";
 import useAvatarStore from "../../../store/avatarStore";
+import useMessageStore from "../../../store/messageStore";
 
 import ProfileAvatar from "../../../components/UI/ProfileAvatar/ProfileAvatar";
 import ProfileName from "../../../components/UI/ProfileName/ProfileName";
@@ -7,7 +8,7 @@ import DiskSpace from "../../../components/UI/DiskSpace/DiskSpace";
 
 function Details() {
   const { setUser } = useAuthStore();
-
+  const addMessage = useMessageStore((state) => state.addMessage);
   const { uploadAvatar, error, isHover } = useAvatarStore();
 
   async function addAvatar(e) {
@@ -16,7 +17,7 @@ function Details() {
       if (!file) throw e;
 
       const data = await uploadAvatar(file, setUser);
-      console.log(data);
+      addMessage(data.message);
     } catch (e) {
       console.log(e);
     }
