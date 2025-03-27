@@ -27,9 +27,9 @@ const useAuthStore = create((set) => ({
       if (!responce.ok) {
         throw new Error(data.message || "Login failed");
       }
-
+      console.log(data)
       set({
-        user: { userId: data.userId, email, avatar: data.avatar },
+        user: { userId: data.userId, email, avatar: data.user.avatar },
         token: data.token,
         isAuth: true,
         loading: false,
