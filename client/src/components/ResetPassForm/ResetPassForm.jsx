@@ -1,5 +1,6 @@
 import useAuthStore from "../../store/authStore";
 import useStore from "../../store/store";
+import useMessageStore from "../../store/messageStore";
 import { useNavigate, useLocation } from "react-router";
 import { useState } from "react";
 
@@ -39,10 +40,13 @@ function ResetPassForm() {
   const navigate = useNavigate();
   const email = useLocation().state;
 
+  const addMessage = useMessageStore((state) => state.addMessage);
+
   const submitPassword = async (data) => {
     try {
-      await resetPassword(email, data.code, data.password);
-      navigate("/auth", { state: { isChanged: true } });
+      const res = await resetPassword(email, data.code, data.password);
+      navigate("/auth");
+      addMessage(res.message);
     } catch (e) {
       console.log(e);
     }

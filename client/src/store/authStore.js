@@ -11,7 +11,8 @@ const useAuthStore = create((set) => ({
   setUser: (userData) => {
     set((state) => ({
       user: { ...state.user, ...userData },
-    }))},
+    }));
+  },
 
   login: async (email, password) => {
     set({ loading: true, error: null });
@@ -125,6 +126,7 @@ const useAuthStore = create((set) => ({
       });
 
       localStorage.setItem("token", data.token);
+      return { message: "Электронная почта успешно подтверждена" };
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;
@@ -194,6 +196,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({ loading: false });
+      return { message: "Пароль успешно сменен" };
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;
