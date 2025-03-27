@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAuthStore from "../../store/authStore";
 
 import { useNavigate, useLocation } from "react-router";
@@ -61,9 +61,6 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
     reset();
   };
 
-  // Для смены пароля
-  const isChanged = useLocation().state?.isChanged;
-
   return (
     <form
       className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-80 self-center"
@@ -104,8 +101,6 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
       </p>
 
       {error && <p className="text-red-600 mt-2">{error}</p>}
-
-      {isChanged && <p className="mt-4 text-secondary-color font-medium">Пароль успешно сменен!</p>}
 
       <FormButton type="submit" disabled={loading}>
         {isLogin ? "Войти" : "Зарегестрироваться"}

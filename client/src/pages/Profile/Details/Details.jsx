@@ -1,16 +1,60 @@
-import Input from "../../../components/UI/Input/Input";
 import useAuthStore from "../../../store/authStore";
+import useAvatarStore from "../../../store/avatarStore";
+import useMessageStore from "../../../store/messageStore";
+
+import ProfileAvatar from "../../../components/UI/ProfileAvatar/ProfileAvatar";
+import ProfileName from "../../../components/UI/ProfileName/ProfileName";
+import DiskSpace from "../../../components/UI/DiskSpace/DiskSpace";
+import ProfileInput from "../../../components/UI/ProfileInput/ProfileInput";
+import Btn from "../../../components/UI/Btn/Btn";
+import { useState } from "react";
 
 function Details() {
-  const user = useAuthStore((state) => state.user);
+  const { setUser, user } = useAuthStore();
+  const addMessage = useMessageStore((state) => state.addMessage);
+  const { uploadAvatar, error, isHover } = useAvatarStore();
+
+  async function addAvatar(e) {
+    const file = e.target.files[0];
+    try {
+      if (!file) throw e;
+
+      const data = await uploadAvatar(file, setUser);
+      addMessage(data.message);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const [isEditing, setIsEditing] = useState(false);
+  function toggleIsEditing() {
+    setIsEditing(!isEditing);
+  }
 
   return (
     <div>
-      {/* <input
-        className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-        placeholder="Введите ваше имя"
-      /> */}
-      
+      <div className="flex items-center">
+        <ProfileAvatar className="mr-4" addAvatar={addAvatar} />
+        <ProfileName isEditing={isEditing} />
+      </div>
+      <p
+        className={`${
+          isHover ? "opacity-100" : "opacity-0"
+        } transition mt-2 text-sm text-gray-500`}
+      >
+        Доступные форматы - png, jpg, jpeg. Максимальный размер 5 Мб.
+      </p>
+      <ProfileInput
+        disabled={true}
+        labelText="Электронная почта"
+        placeholder={user.email}
+        subtext="Для общения с поддержкой и важных сообщений от Cloudy"
+      />
+      {error && <div className="mt-2 text-red-500">{error}</div>}
+      {/* <DiskSpace className="mt-8" /> */}
+      <Btn className="py-1 px-1 text-sm mt-6" handleClick={toggleIsEditing}>
+        Редактировать профиль
+      </Btn>
     </div>
   );
 }

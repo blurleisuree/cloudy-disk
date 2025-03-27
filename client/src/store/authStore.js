@@ -8,6 +8,12 @@ const useAuthStore = create((set) => ({
   isAuth: false,
   error: null,
 
+  setUser: (userData) => {
+    set((state) => ({
+      user: { ...state.user, ...userData },
+    }));
+  },
+
   login: async (email, password) => {
     set({ loading: true, error: null });
     try {
@@ -22,9 +28,8 @@ const useAuthStore = create((set) => ({
       if (!responce.ok) {
         throw new Error(data.message || "Login failed");
       }
-
       set({
-        user: { userId: data.userId, email },
+        user: { userId: data.userId, email, avatar: data.user.avatar },
         token: data.token,
         isAuth: true,
         loading: false,
@@ -85,7 +90,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({
-        user: { userId: data.userId, email: data.email },
+        user: { userId: data.userId, email: data.email, avatar: data.avatar },
         token,
         isAuth: true,
         loading: false,
@@ -114,13 +119,14 @@ const useAuthStore = create((set) => ({
       }
 
       set({
-        user: { userId: data.userId, email },
+        user: { userId: data.userId, email, avatar: data.avatar },
         token: data.token,
         isAuth: true,
         loading: false,
       });
 
       localStorage.setItem("token", data.token);
+      return { message: "Электронная почта успешно подтверждена" };
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;
@@ -190,6 +196,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({ loading: false });
+      return { message: "Пароль успешно сменен" };
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;
