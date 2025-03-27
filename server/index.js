@@ -5,6 +5,7 @@ const helmet = require('helmet');
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const authRouter = require("./routes/auth.routes");
+const userRouter = require("./routes/user.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(helmet())
 app.use(corsMiddleware);
 app.use(express.json());
 app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
 
 const start = async () => {
   try {

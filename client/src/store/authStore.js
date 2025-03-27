@@ -24,7 +24,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({
-        user: { userId: data.userId, email },
+        user: { userId: data.userId, email, avatar: data.avatar },
         token: data.token,
         isAuth: true,
         loading: false,
@@ -85,7 +85,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({
-        user: { userId: data.userId, email: data.email },
+        user: { userId: data.userId, email: data.email, avatar: data.avatar },
         token,
         isAuth: true,
         loading: false,

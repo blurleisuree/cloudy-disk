@@ -286,7 +286,7 @@ router.get("/me", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    return res.json({ userId: user._id, email: user.email });
+    return res.json({ userId: user._id, email: user.email, avatar: user.avatar });
   } catch (e) {
     console.log(e);
     res.status(500).json({ message: "Server error", e });
