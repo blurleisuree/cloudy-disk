@@ -4,14 +4,14 @@ import useAvatarStore from "../../../store/avatarStore";
 
 // Для смены аватара в настройках
 function ProfileAvatar({ className, addAvatar }) {
-  const { avatarSrc, loading, toggleIsHover } = useAvatarStore();
-  const avatar = useAuthStore((state) => state.user.avatar)
+  const { loading, toggleIsHover } = useAvatarStore();
+  const avatar = useAuthStore((state) => state.user.avatar);
 
   return (
     <label
       onMouseOver={toggleIsHover}
       onMouseOut={toggleIsHover}
-      className={`${className} relative cursor-pointer inline-block min-w-14 rounded-lg transition`}
+      className={`${className} relative cursor-pointer inline-block rounded-lg transition overflow-hidden w-16 h-16`}
     >
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center">
@@ -28,9 +28,9 @@ function ProfileAvatar({ className, addAvatar }) {
         // Заглушка если аватара нет
         src={avatar || profileSvg}
         alt="profileBtn"
-        className="w-full h-full"
+        className="w-full h-full object-cover"
       />
-      <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-80 opacity-0 hover:opacity-100 transition flex items-center justify-center rounded-full transition">
+      <div className="absolute top-0 w-full h-full bg-gray-700 bg-opacity-80 opacity-0 hover:opacity-100 flex items-center justify-center rounded-full transition">
         <p className="text-xs text-center text-white block">Изменить фото</p>
       </div>
     </label>

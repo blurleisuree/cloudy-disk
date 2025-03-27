@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import useAuthStore from "../../../store/authStore";
 import useAvatarStore from "../../../store/avatarStore";
 
@@ -8,18 +6,17 @@ import ProfileName from "../../../components/UI/ProfileName/ProfileName";
 import DiskSpace from "../../../components/UI/DiskSpace/DiskSpace";
 
 function Details() {
-  // const user = useAuthStore((state) => state.user);
-  const { user, token } = useAuthStore();
+  const { setUser } = useAuthStore();
 
   const { uploadAvatar, error, isHover } = useAvatarStore();
 
-  function addAvatar(e) {
+  async function addAvatar(e) {
     const file = e.target.files[0];
     try {
       if (!file) throw e;
 
-      uploadAvatar(file, token);
-      // useAuthStore.setState({ user: { ...user, avatar: data.avatar } });
+      const data = await uploadAvatar(file, setUser);
+      console.log(data)
     } catch (e) {
       console.log(e);
     }
@@ -28,7 +25,7 @@ function Details() {
   return (
     <div>
       <div className="flex items-center">
-        <ProfileAvatar className="mr-4 w-16" addAvatar={addAvatar} />
+        <ProfileAvatar className="mr-4" addAvatar={addAvatar} />
         <ProfileName />
       </div>
       <p

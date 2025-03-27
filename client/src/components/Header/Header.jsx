@@ -40,7 +40,7 @@ function Header() {
 
   const triggerElement = (
     <ProfileBtn
-      className="w-12 cursor-pointer transition active:opacity-35"
+      className=""
       onClick={toggleMenu}
     />
   );

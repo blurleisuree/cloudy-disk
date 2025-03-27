@@ -11,7 +11,7 @@ const useStore = create((set) => ({
     set((state) => ({ isHover: !state.isHover }));
   },
 
-  uploadAvatar: async (file, token) => {
+  uploadAvatar: async (file, updateUser) => {
     set({ loading: true, error: null });
 
     if (!file) return;
@@ -19,10 +19,11 @@ const useStore = create((set) => ({
     const formData = new FormData();
     formData.append("avatar", file);
 
+    const token = localStorage.getItem("token");
     if (!token) {
       return;
     }
-    
+
     try {
       const response = await fetch(`${API_URL}api/user/avatar`, {
         method: "POST",
@@ -34,13 +35,13 @@ const useStore = create((set) => ({
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message|| "Uploading avatar failed");
+        throw new Error(errorData.message || "Uploading avatar failed");
       }
       const data = await response.json();
 
-      set({
-        avatarSrc: data.avatar,
-      });
+      updateUser({ avatar: data.avatar }); // Вызываем переданную функцию
+      set({ loading: false });
+      return data;
     } catch (e) {
       set({ error: e.message, loading: false });
       throw e;

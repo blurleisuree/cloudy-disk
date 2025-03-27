@@ -8,6 +8,11 @@ const useAuthStore = create((set) => ({
   isAuth: false,
   error: null,
 
+  setUser: (userData) => {
+    set((state) => ({
+      user: { ...state.user, ...userData },
+    }))},
+
   login: async (email, password) => {
     set({ loading: true, error: null });
     try {
@@ -114,7 +119,7 @@ const useAuthStore = create((set) => ({
       }
 
       set({
-        user: { userId: data.userId, email },
+        user: { userId: data.userId, email, avatar: data.avatar },
         token: data.token,
         isAuth: true,
         loading: false,
