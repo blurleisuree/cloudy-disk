@@ -5,9 +5,11 @@ import useMessageStore from "../../../store/messageStore";
 import ProfileAvatar from "../../../components/UI/ProfileAvatar/ProfileAvatar";
 import ProfileName from "../../../components/UI/ProfileName/ProfileName";
 import DiskSpace from "../../../components/UI/DiskSpace/DiskSpace";
+import Btn from "../../../components/UI/Btn/Btn";
+import { useState } from "react";
 
 function Details() {
-  const { setUser } = useAuthStore();
+  const { setUser, user } = useAuthStore();
   const addMessage = useMessageStore((state) => state.addMessage);
   const { uploadAvatar, error, isHover } = useAvatarStore();
 
@@ -23,11 +25,16 @@ function Details() {
     }
   }
 
+  const [isEditing, setIsEditing] = useState(false);
+  function toggleIsEditing() {
+    setIsEditing(!isEditing);
+  }
+
   return (
     <div>
       <div className="flex items-center">
         <ProfileAvatar className="mr-4" addAvatar={addAvatar} />
-        <ProfileName />
+        <ProfileName isEditing={isEditing} />
       </div>
       <p
         className={`${
@@ -37,7 +44,10 @@ function Details() {
         Доступные форматы - png, jpg, jpeg. Максимальный размер 5 Мб.
       </p>
       {error && <div className="mt-2 text-red-500">{error}</div>}
-      <DiskSpace className="mt-8" />
+      {/* <DiskSpace className="mt-8" /> */}
+      <Btn className="py-1 px-1 text-sm mt-6" handleClick={toggleIsEditing}>
+        Редактировать профиль
+      </Btn>
     </div>
   );
 }
