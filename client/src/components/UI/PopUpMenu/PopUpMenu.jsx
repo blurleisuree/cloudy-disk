@@ -23,7 +23,7 @@ function PopUpMenu({ triggerElement, menuItems }) {
           <div className="fixed inset-0 z-40" onClick={handleClose} />
 
           <div
-            className={`block absolute right-0 mt-5 py-4 w-max bg-white rounded-lg shadow-lg z-50 ${classes.popup}`}
+            className={`block absolute right-0 mt-5 py-4 w-max bg-white rounded-lg z-50 ${classes.popup}`}
           >
             {items.map((item, index) => (
               <PopUpMenuElem
