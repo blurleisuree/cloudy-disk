@@ -7,6 +7,12 @@ require("dotenv").config();
 const { check, validationResult } = require("express-validator");
 const router = new Router();
 
+const authMiddleware = require("../middleware/auth.middleware");
+
+if (!process.env.SMTP_EMAIL || !process.env.SMTP_PASSWORD) {
+  throw new Error("SMTP credentials are not defined in .env");
+}
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -47,13 +53,12 @@ router.post(
       const hashPassword = await bcrypt.hash(password, 8);
       const verificationCode = generateCode();
 
-      const verificationExpiresTime = new Date(Date.now());
       const user = new User({
         email,
         password: hashPassword,
         isVerified: false,
         verificationCode: verificationCode,
-        verificationExpires: verificationExpiresTime,
+        verificationExpires: new Date(Date.now() + 10 * 60 * 1000),
       });
       await user.save();
 
@@ -92,10 +97,8 @@ router.post("/verify", async (req, res) => {
       return res.status(404).json({ message: "Wrong email" }); // Если нет юзера по этой почте
     }
 
-    const now = new Date();
-    const expiresAt = new Date(user.verificationExpires.getTime() + 600 * 1000); // Добавляем 10 минут к verificationExpires
-    if (now > expiresAt) {
-      return res.status(400).json({ message: "Verification code has expired" });
+    if (new Date() > user.verificationExpires) {
+      return sendResponse(res, 400, "Verification code has expired");
     }
 
     const isCodeValid = code === user.verificationCode;
@@ -178,7 +181,7 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ message: "User not found" }); // Если нет юзера ответ erorr
     }
 
-    const isPassValid = bcrypt.compareSync(password, user.password); // сравнивает зашифрованный пароль с незашифрованным
+    const isPassValid = bcrypt.compare(password, user.password); // сравнивает зашифрованный пароль с незашифрованным
     if (!isPassValid) {
       return res.status(404).json({ message: "Invalid password" });
     }
@@ -249,11 +252,17 @@ router.post("/forgot-password", async (req, res) => {
 router.post("/reset-password", async (req, res) => {
   try {
     const { email, resetCode, newPassword } = req.body;
+    if (newPassword.length < 3 || newPassword.length > 12) {
+      return sendResponse(
+        res,
+        400,
+        "Password must be between 3 and 12 characters"
+      );
+    }
 
     const user = await User.findOne({
       email,
       resetCode,
-      resetExpires: { $gt: Date.now() }, // Проверяем, не истёк ли код
     });
 
     if (!user) {
@@ -272,23 +281,20 @@ router.post("/reset-password", async (req, res) => {
 });
 
 // Проверка аутентификации
-router.get("/me", async (req, res) => {
+router.get("/me", authMiddleware, async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-    }
-
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    const user = await User.findById(decoded.id);
-
+    const user = await User.findById(req.user.id);
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return sendResponse(res, 404, "User not found");
     }
 
-    return res.json({ userId: user._id, email: user.email, avatar: user.avatar });
+    return res.json({
+      userId: user._id,
+      email: user.email,
+      avatar: user.avatar,
+    });
   } catch (e) {
-    console.log(e);
+    console.error("Me error:", e);
     res.status(500).json({ message: "Server error", e });
   }
 });
