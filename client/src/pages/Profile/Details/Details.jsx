@@ -16,7 +16,7 @@ function Details() {
       if (!file) throw e;
 
       const data = await uploadAvatar(file, setUser);
-      console.log(data)
+      console.log(data);
     } catch (e) {
       console.log(e);
     }

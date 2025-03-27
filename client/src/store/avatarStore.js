@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { API_URL } from "../apiConfig";
 
 const useStore = create((set) => ({
-  // avatarSrc: undefined,
   loading: false,
   error: null,
   isHover: false,
@@ -35,7 +34,7 @@ const useStore = create((set) => ({
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Uploading avatar failed");
+        throw new Error(errorData.message, errorData?.error || "Uploading avatar failed");
       }
       const data = await response.json();
 
