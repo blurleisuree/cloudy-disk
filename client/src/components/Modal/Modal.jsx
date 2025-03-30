@@ -1,5 +1,5 @@
 import classes from "./Modal.module.css";
-import FormButton from "../UI/FormButton/FormButton";
+import Btn from "../UI/Btn/Btn";
 import cross from "../../assets/cross.svg";
 
 import useExitModalStore from "../../store/exitModalStore";
@@ -32,8 +32,10 @@ function Modal() {
         <p className="text-xl text-black font-medium">
           Вы уверены, что хотите выйти из аккаунта?
         </p>
-        <FormButton onClick={toggleModal}>Отмена</FormButton>
-        <FormButton onClick={exit}>Выйти</FormButton>
+        <div className="mt-6">
+          <Btn handleClick={toggleModal} className='py-2 px-7'>Отмена</Btn>
+          <Btn handleClick={exit} className='py-2 px-7 ml-4 border-red-500 text-red-500 hover:bg-red-100'>Выйти</Btn>
+        </div>
       </div>
     </div>
   );
