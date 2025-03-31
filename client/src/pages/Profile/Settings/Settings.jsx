@@ -1,16 +1,17 @@
 import Btn from "../../../components/UI/Btn/Btn";
-import useExitModalStore from "../../../store/exitModalStore";
-import Modal from "../../../components/Modal/Modal";
+
+import useOpenExitModal from "../../../shared/hooks/useOpenExitModal";
 
 function Settings() {
-  const toggleModal = useExitModalStore((state) => state.toggleModal);
+  const openExitModal = useOpenExitModal();
 
   return (
     <div className="flex-col">
       <h2 className="text-lg font-medium mb-4">Безопасность</h2>
-      <Btn className='py-2.5 px-5' handleClick={toggleModal}>Выйти на данном устройстве</Btn>
+      <Btn className="py-2.5 px-5" handleClick={openExitModal}>
+        Выйти на данном устройстве
+      </Btn>
       {/* <Btn className="ml-4">Выйти на всех устройтвах</Btn> */}
-      <Modal />
     </div>
   );
 }

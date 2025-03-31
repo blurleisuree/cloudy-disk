@@ -21,6 +21,7 @@ import Details from "../pages/Profile/Details/Details.jsx";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import Message from "../components/Message/Message.jsx";
 import Loader from "../shared/components/UI/Loader/Loader.jsx";
+import Modal from "../shared/components/Modal/Modal.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -38,6 +39,7 @@ function App() {
   return (
     <div className={classes.App}>
       <Message />
+      <Modal />
       <Routes>
         <Route element={<PublicRoute />}>
           <Route element={<AuthPage />}>
