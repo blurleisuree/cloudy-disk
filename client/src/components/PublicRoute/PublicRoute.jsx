@@ -1,14 +1,13 @@
 import { Navigate, Outlet } from "react-router";
 import useAuthStore from "../../store/authStore";
-
-import LoaderPage from "../LoaderPage/LoaderPage";
+import Loader from "../UI/Loader/Loader";
 
 function PublicRoute() {
   const isAuth = useAuthStore((state) => state.isAuth);
   const loading = useAuthStore((state) => state.loading);
 
   if (loading) {
-    return <LoaderPage />;
+    return <Loader fullPage={true}/>;
   }
 
   return !isAuth ? <Outlet /> : <Navigate to="/" replace />;

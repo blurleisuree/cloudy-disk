@@ -15,12 +15,12 @@ import PublicRoute from "../components/PublicRoute/PublicRoute";
 import Files from "../pages/Files/Files";
 import Main from "../pages/Main/Main";
 
-import LoaderPage from "../components/LoaderPage/LoaderPage";
 import Profile from "../pages/Profile/Profile.jsx";
 import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
-import Favourite from '../pages/Favourite/Favourite.jsx'
+import Favourite from "../pages/Favourite/Favourite.jsx";
 import Message from "../components/Message/Message.jsx";
+import Loader from "../components/UI/Loader/Loader.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -33,7 +33,7 @@ function App() {
     verifyAuth();
   }, [checkAuth]);
 
-  if (loading) return <LoaderPage />;
+  if (loading) return <Loader fullPage={true} />;
 
   return (
     <div className={classes.App}>

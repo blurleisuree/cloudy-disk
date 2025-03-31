@@ -1,7 +1,5 @@
 import { Outlet } from "react-router";
 import logo from "../../assets/logo_text.svg";
-import AuthForm from "../../components/AuthForm/AuthForm";
-
 import classes from "./AuthPage.module.css";
 
 function AuthPage() {

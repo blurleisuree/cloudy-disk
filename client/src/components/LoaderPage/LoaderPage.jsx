@@ -1,7 +1,3 @@
-import React from "react";
-
-import classes from "./LoaderPage.module.css";
-
 function LoaderPage() {
   return (
     <div className="w-screen h-screen flex items-center justify-center">

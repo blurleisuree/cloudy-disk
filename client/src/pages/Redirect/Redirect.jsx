@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import LoaderPage from "../../components/LoaderPage/LoaderPage";
+import Loader from '../../components/UI/Loader';
 import useAuthStore from "../../store/authStore";
 
 function Redirect() {
@@ -17,7 +17,7 @@ function Redirect() {
     }, 1000);
   }, [navigate, isAuth]);
 
-  return <LoaderPage />;
+  return <Loader fullPage={true} />;
 }
 
 export default Redirect;
