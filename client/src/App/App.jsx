@@ -20,7 +20,7 @@ import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import Message from "../components/Message/Message.jsx";
-import Loader from "../components/UI/Loader/Loader.jsx";
+import Loader from "../shared/components/UI/Loader/Loader.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
