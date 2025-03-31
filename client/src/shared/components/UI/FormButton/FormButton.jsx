@@ -1,6 +1,4 @@
-import React from "react";
-
-const Button = ({ type = "button", onClick, children }) => {
+const FormButton = ({ type = "button", onClick, children }) => {
   return (
     <button
       type={type}
@@ -12,4 +10,4 @@ const Button = ({ type = "button", onClick, children }) => {
   );
 };
 
-export default Button;
+export default FormButton;

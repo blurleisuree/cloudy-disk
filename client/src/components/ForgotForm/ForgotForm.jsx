@@ -1,8 +1,8 @@
 import useAuthStore from "../../store/authStore";
 import { useNavigate } from "react-router";
 
-import Input from "../UI/Input/Input";
-import FormButton from "../UI/FormButton/FormButton";
+import Input from '../../shared/components/UI/Input/Input';
+import FormButton from '../../shared/components/UI/FormButton/FormButton'
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
