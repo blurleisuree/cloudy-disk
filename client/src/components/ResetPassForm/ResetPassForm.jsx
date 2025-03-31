@@ -1,6 +1,6 @@
 import useAuthStore from "../../store/authStore";
 import useStore from "../../store/store";
-import useMessageStore from "../../store/messageStore";
+import useMessageStore from "../../shared/store/messageStore";
 import { useNavigate, useLocation } from "react-router";
 import { useState } from "react";
 

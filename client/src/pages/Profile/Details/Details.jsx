@@ -1,6 +1,6 @@
 import useAuthStore from "../../../store/authStore";
 import useAvatarStore from "../../../store/avatarStore";
-import useMessageStore from "../../../store/messageStore";
+import useMessageStore from "../../../shared/store/messageStore";
 
 import ProfileAvatar from "../../../components/UI/ProfileAvatar/ProfileAvatar";
 import ProfileName from "../../../components/UI/ProfileName/ProfileName";

@@ -19,7 +19,7 @@ import Profile from "../pages/Profile/Profile.jsx";
 import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
 import Favourite from "../pages/Favourite/Favourite.jsx";
-import Message from "../components/Message/Message.jsx";
+import Message from "../shared/components/Message/Message.jsx";
 import Loader from "../shared/components/UI/Loader/Loader.jsx";
 import Modal from "../shared/components/Modal/Modal.jsx";
 

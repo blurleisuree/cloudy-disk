@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import useAuthStore from "../../store/authStore";
 import useStore from "../../store/store";
-import useMessageStore from '../../store/messageStore';
+import useMessageStore from "../../shared/store/messageStore";
 
 import Input from "../UI/Input/Input";
 import FormButton from "../UI/FormButton/FormButton";
@@ -19,7 +19,7 @@ const codeSchema = Yup.object().shape({
 });
 
 function VerifyPage() {
-  const addMessage = useMessageStore((state) => state.addMessage)
+  const addMessage = useMessageStore((state) => state.addMessage);
   const email = useLocation().state;
 
   const {
@@ -38,7 +38,7 @@ function VerifyPage() {
   const submitCode = async (data) => {
     try {
       const res = await verify(data.code, email);
-      addMessage(res.message)
+      addMessage(res.message);
     } catch (e) {
       console.log(e);
     }
