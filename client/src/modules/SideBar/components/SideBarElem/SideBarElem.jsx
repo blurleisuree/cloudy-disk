@@ -7,7 +7,6 @@ function SideBarElem({ text, src, link, alt, srcActive }) {
   }
 
   const url = useLocation().pathname;
-
   const isActive = url === link;
 
   return (
