@@ -1,7 +1,7 @@
 import useModalStore from "../store/modalStore";
 import useAuthStore from "../../store/authStore";
 
-import Btn from "../../components/UI/Btn/Btn";
+import Btn from "../../shared/components/UI/Btn/Btn";
 
 function useOpenExitModal() {
   const { openModal, closeModal } = useModalStore();

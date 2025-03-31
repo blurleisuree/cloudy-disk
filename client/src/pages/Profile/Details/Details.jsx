@@ -6,7 +6,7 @@ import ProfileAvatar from "../../../components/UI/ProfileAvatar/ProfileAvatar";
 import ProfileName from "../../../components/UI/ProfileName/ProfileName";
 import DiskSpace from "../../../components/UI/DiskSpace/DiskSpace";
 import ProfileInput from "../../../components/UI/ProfileInput/ProfileInput";
-import Btn from "../../../components/UI/Btn/Btn";
+import Btn from '../../../shared/components/UI/Btn/Btn'
 import { useState } from "react";
 
 function Details() {

@@ -1,4 +1,4 @@
-import Btn from "../../../components/UI/Btn/Btn";
+import Btn from '../../../shared/components/UI/Btn/Btn'
 
 import useOpenExitModal from "../../../shared/hooks/useOpenExitModal";
 
