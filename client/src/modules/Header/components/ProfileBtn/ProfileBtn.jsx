@@ -1,6 +1,7 @@
-import profileSvg from "../../../assets/profile.svg";
-import useAuthStore from "../../../store/authStore";
-import useAvatarStore from "../../../store/avatarStore";
+import profileSvg from "../../../../assets/profile.svg";
+
+import useAuthStore from "../../../../store/authStore";
+import useAvatarStore from "../../../../store/avatarStore";
 
 // Для кнопки в хедере
 function ProfileBtn({ className, onClick }) {

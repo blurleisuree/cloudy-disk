@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 
 import {SideBar} from "../../modules/SideBar/";
-import Header from "../../components/Header/Header";
+import {Header} from "../../modules/Header/";
 
 function Main() {
   return (
