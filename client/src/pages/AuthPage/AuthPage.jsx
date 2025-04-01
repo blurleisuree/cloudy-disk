@@ -8,10 +8,7 @@ function AuthPage() {
   return (
     <div>
       <div
-        className={
-          classes.Login +
-          " h-screen contaier mx-auto flex items-center justify-center flex-col"
-        }
+        className={`${classes.Login} h-screen contaier mx-auto flex items-center justify-center flex-col`}
       >
         <Logo className="mb-10" type="text" />
         <Outlet />

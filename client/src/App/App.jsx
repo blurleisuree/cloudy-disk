@@ -5,20 +5,23 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import useAuthStore from "../store/authStore";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
+
 import AuthForm from "../components/AuthForm/AuthForm";
 import VerifyForm from "../components/VerifyForm/VerifyForm";
 import ForgotForm from "../components/ForgotForm/ForgotForm";
 import ResetPassForm from "../components/ResetPassForm/ResetPassForm.jsx";
+
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
 import PublicRoute from "../components/PublicRoute/PublicRoute";
 
-import Files from "../pages/Files/Files";
 import Main from "../pages/Main/Main";
 
+import Files from "../pages/Files/Files";
+import Favourite from "../pages/Favourite/Favourite.jsx";
 import Profile from "../pages/Profile/Profile.jsx";
 import Settings from "../pages/Profile/Settings/Settings.jsx";
 import Details from "../pages/Profile/Details/Details.jsx";
-import Favourite from "../pages/Favourite/Favourite.jsx";
+
 import Message from "../shared/components/Message/Message.jsx";
 import Loader from "../shared/components/UI/Loader/Loader.jsx";
 import Modal from "../shared/components/Modal/Modal.jsx";

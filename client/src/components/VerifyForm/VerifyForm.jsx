@@ -18,7 +18,7 @@ const codeSchema = Yup.object().shape({
     .trim(),
 });
 
-function VerifyPage() {
+function VerifyForm() {
   const addMessage = useMessageStore((state) => state.addMessage);
   const email = useLocation().state;
 
@@ -102,4 +102,4 @@ function VerifyPage() {
   );
 }
 
-export default VerifyPage;
+export default VerifyForm;

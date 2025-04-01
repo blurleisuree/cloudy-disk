@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import Loader from '../../components/UI/Loader';
 import useAuthStore from "../../store/authStore";
+
+import Loader from "../../shared/components/UI/Loader/Loader";
 
 function Redirect() {
   const navigate = useNavigate();
