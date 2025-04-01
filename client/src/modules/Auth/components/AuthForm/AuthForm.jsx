@@ -4,7 +4,6 @@ import LoginRegisterForm from "../LoginRegisterForm/LoginRegisterForm";
 
 function AuthForm() {
   // Переключение входа/регистрация
-  // TODO переделать в функцию высшего порядка ?
   const [isLogin, setIsLogin] = useState(() => initIsLogin());
   function initIsLogin() {
     const storedValue = localStorage.getItem("isLogin");

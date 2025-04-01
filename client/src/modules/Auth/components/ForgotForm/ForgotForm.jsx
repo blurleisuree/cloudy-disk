@@ -1,8 +1,12 @@
-import useAuthStore from "../../store/authStore";
+import useAuthStore from "../../../../store/authStore";
 import { useNavigate } from "react-router";
 
-import Input from '../../shared/components/UI/Input/Input';
-import FormButton from '../../shared/components/UI/FormButton/FormButton'
+import Input from "../../../../shared/components/UI/Input/Input";
+import FormButton from "../../../../shared/components/UI/FormButton/FormButton";
+import FormTitle from "../FormTitle/FormTitle";
+import NavText from "../NavText/NavText";
+import ErrorText from "../ErrorText/ErrorText";
+import FormSubtitle from "../FormSubtitle/FormSubtitle";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,14 +42,11 @@ function ForgotForm() {
   };
 
   return (
-    <form
-      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8  w-80 self-center"
-      onSubmit={handleSubmit(submitEmail)}
-    >
-      <h3 className="font-medium text-2xl mb-6">Востановление пароля</h3>
-      <p className="mb-4">
+    <form onSubmit={handleSubmit(submitEmail)}>
+      <FormTitle>Востановление пароля</FormTitle>
+      <FormSubtitle>
         Введите адрес электронной почты на который зарегистрирован ваш аккаунт
-      </p>
+      </FormSubtitle>
       <Input
         label="Email"
         type="text"
@@ -55,16 +56,16 @@ function ForgotForm() {
         placeholder="youremail@cloudy.com"
       />
 
-      <p className="text-red-600 mt-2">{error}</p>
+      {error && <ErrorText className="mt-2">{error}</ErrorText>}
       <FormButton type="submit" disabled={loading}>
         Подтвердить
       </FormButton>
-      <p
-        className="block mt-5 underline underline-offset-2 text-secondary-color cursor-pointer"
+      <NavText
+        className="mt-5 text-secondary-color"
         onClick={() => navigate("/auth")}
       >
         Назад к авторизации
-      </p>
+      </NavText>
     </form>
   );
 }

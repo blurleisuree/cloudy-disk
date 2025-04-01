@@ -1,11 +1,16 @@
-import useAuthStore from "../../store/authStore";
-import useStore from "../../store/store";
-import useMessageStore from "../../shared/store/messageStore";
+import useAuthStore from "../../../../store/authStore";
+import useMessageStore from "../../../../shared/store/messageStore";
+import useShowPassStore from "../../store/showPassStore";
 import { useNavigate, useLocation } from "react-router";
-import { useState } from "react";
 
-import Input from '../../shared/components/UI/Input/Input';
-import FormButton from '../../shared/components/UI/FormButton/FormButton'
+import Input from "../../../../shared/components/UI/Input/Input";
+import FormButton from "../../../../shared/components/UI/FormButton/FormButton";
+import FormTitle from "../FormTitle/FormTitle";
+import NavText from "../NavText/NavText";
+import ErrorText from "../ErrorText/ErrorText";
+import ShowPass from "../ShowPass/ShowPass";
+import GetNewCode from "../GetNewCode/GetNewCode";
+import FormSubtitle from "../FormSubtitle/FormSubtitle";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,6 +32,8 @@ const resetSchema = Yup.object().shape({
 });
 
 function ResetPassForm() {
+  const isShowPass = useShowPassStore((state) => state.isShowPass);
+
   const {
     register,
     handleSubmit,
@@ -52,29 +59,13 @@ function ResetPassForm() {
     }
   };
 
-  // Для инпута с паролем
-  const [showPassword, setShowPassword] = useState(false);
-
-  const { codeIsResend, setCodeIsResend } = useStore();
-  const getNewCode = async () => {
-    try {
-      await forgotPassword(email);
-      setCodeIsResend(true);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
-    <form
-      className=" bg-white shadow-md rounded-xl px-8 pt-6 pb-8 w-80 self-center"
-      onSubmit={handleSubmit(submitPassword)}
-    >
-      <h3 className="font-medium text-2xl mb-6">Востановление пароля</h3>
-      <p className="mb-4">
+    <form onSubmit={handleSubmit(submitPassword)}>
+      <FormTitle>Востановление пароля</FormTitle>
+      <FormSubtitle>
         Введите код подтверждения который пришел вам на почту и укажите новый
         пароль.
-      </p>
+      </FormSubtitle>
       <Input
         label="Код"
         type="text"
@@ -85,45 +76,22 @@ function ResetPassForm() {
       />
       <Input
         label="Пароль"
-        type={showPassword ? "text" : "password"}
+        type={isShowPass ? "text" : "password"}
         name="password"
         placeholder="somepassword"
         register={register}
         errors={errors.password}
       />
-
-      <input
-        type="checkbox"
-        onClick={() => setShowPassword(!showPassword)}
-        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:rounded-sm active:rounded-sm"
-      />
-      <label className="ms-2 mt-1">Показать пароль</label>
-
-      {codeIsResend ? (
-        <p className="mt-6">
-          <span className="text-primary-color">Новый код отправлен!</span>{" "}
-          Проверьте почту
-        </p>
-      ) : (
-        <p className="mt-6">
-          Пожалуйста, проверьте папку со спамом.{" "}
-          <span
-            className="text-primary-color cursor-pointer"
-            onClick={getNewCode}
-          >
-            Повторно отправить письмо с кодом.
-          </span>
-        </p>
-      )}
-
-      <p className="text-red-600 mt-2">{error}</p>
+      <ShowPass />
+      <GetNewCode email={email} resendFunc={forgotPassword} />
+      {error && <ErrorText className="mt-2">{error}</ErrorText>}
       <FormButton type="submit">Подтвердить</FormButton>
-      <p
-        className="block mt-5 underline underline-offset-2 text-secondary-color cursor-pointer"
+      <NavText
+        className="mt-5 text-secondary-color"
         onClick={() => navigate("/auth")}
       >
         Назад к авторизации
-      </p>
+      </NavText>
     </form>
   );
 }
