@@ -1,7 +1,7 @@
 import useMessageStore from "../../../store/messageStore";
 
 function MessageItem({ msg }) {
-  const { removeMessage } = useMessageStore((state) => state.removeMessage);
+  const removeMessage = useMessageStore((state) => state.removeMessage);
 
   const handleClick = (id) => {
     return () => {

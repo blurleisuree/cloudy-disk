@@ -4,7 +4,7 @@ import MessageItem from "./MessageItem/MessageItem";
 
 function Message() {
   const { messages, removeMessage } = useMessageStore();
-
+  
   useEffect(() => {
     messages.forEach((msg) => {
       const timer = setTimeout(() => {
