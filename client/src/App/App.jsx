@@ -12,16 +12,16 @@ import {
   ForgotForm,
   VerifyForm,
   AuthForm,
-  PublicRoute, 
-  ProtectedRoute
+  PublicRoute,
+  ProtectedRoute,
 } from "../modules/Auth/index.js";
 
 import Main from "../pages/Main/Main";
 import Files from "../pages/Files/Files";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import Profile from "../pages/Profile/Profile.jsx";
-import Settings from "../pages/Profile/Settings/Settings.jsx";
-import Details from "../pages/Profile/Details/Details.jsx";
+import SettingsPage from '../pages/Profile/SettingsPage/SettingsPages.jsx'
+import DetailsPage from "../pages/Profile/DetailsPage/DetailsPage.jsx";
 
 import Message from "../shared/components/Message/Message.jsx";
 import Loader from "../shared/components/UI/Loader/Loader.jsx";
@@ -66,9 +66,9 @@ function App() {
             <Route path="files" element={<Files />} />
             <Route path="favourite" element={<Favourite />} />
             <Route path="profile" element={<Profile />}>
-              <Route index element={<Navigate to="settings" replace />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="details" element={<Details />} />
+              <Route index element={<Navigate to="details" replace />} />
+              <Route path="settings" element={<SettingsPage />} />
+              <Route path="details" element={<DetailsPage />} />
             </Route>
           </Route>
         </Route>

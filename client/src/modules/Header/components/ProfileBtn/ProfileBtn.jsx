@@ -1,11 +1,8 @@
-import profileSvg from "../../../../assets/profile.svg";
-
-import useAuthStore from "../../../../store/authStore";
-import useAvatarStore from "../../../../store/avatarStore";
+import useAvatarStore from "../../../../shared/store/avatarStore";
+import Avatar from "../../../../shared/components/UI/Avatar/Avatar";
 
 // Для кнопки в хедере
 function ProfileBtn({ className, onClick }) {
-  const avatar = useAuthStore((state) => state.user.avatar);
   const loading = useAvatarStore((state) => state.loading);
 
   return (
@@ -17,13 +14,7 @@ function ProfileBtn({ className, onClick }) {
           <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
-      <img
-        // Заглушка если аватара нет
-        src={avatar || profileSvg}
-        alt="profileBtn"
-        onClick={onClick}
-        className="object-cover w-12 h-12"
-      />
+    <Avatar onClick={onClick} />
     </div>
   );
 }
