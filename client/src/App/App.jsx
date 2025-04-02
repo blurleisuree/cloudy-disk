@@ -12,13 +12,11 @@ import {
   ForgotForm,
   VerifyForm,
   AuthForm,
+  PublicRoute, 
+  ProtectedRoute
 } from "../modules/Auth/index.js";
 
-import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
-import PublicRoute from "../components/PublicRoute/PublicRoute";
-
 import Main from "../pages/Main/Main";
-
 import Files from "../pages/Files/Files";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import Profile from "../pages/Profile/Profile.jsx";
@@ -31,11 +29,15 @@ import Modal from "../shared/components/Modal/Modal.jsx";
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
-  const loading = useAuthStore((state) => state.laoding);
+  const loading = useAuthStore((state) => state.loading);
 
   useEffect(() => {
     const verifyAuth = async () => {
-      await checkAuth();
+      try {
+        await checkAuth();
+      } catch (e) {
+        console.error("Ошибка проверки авторизации:", e);
+      }
     };
     verifyAuth();
   }, [checkAuth]);

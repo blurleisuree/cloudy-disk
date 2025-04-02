@@ -15,7 +15,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
   const isShowPass = useShowPassStore((state) => state.isShowPass);
 
   const { register, handleSubmit, reset, errors } = useAuthForm({
-    formType: "registration",
+    formType: isLogin ? "login" : "registration",
     mode: "onBlur",
   });
 
@@ -27,6 +27,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
       } else {
         await registration(data.email, data.password);
         navigate("/auth/verify", { state: data.email });
+        reset();
       }
     } catch (e) {
       console.log(e);
@@ -35,7 +36,6 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
         navigate("/auth/verify", { state: data.email });
       }
     }
-    reset();
   };
 
   return (
@@ -67,7 +67,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
       </NavText>
       {error && <ErrorText className="mt-2">{error}</ErrorText>}
       <FormButton type="submit" disabled={loading}>
-        {isLogin ? "Войти" : "Зарегестрироваться"}
+        {isLogin ? "Войти" : "Зарегистрироваться"}
       </FormButton>
       <NavText onClick={toggleIsLogin} className="text-secondary-color mt-4">
         {isLogin ? "Еще не зарегистрированы?" : "Уже есть аккаунт?"}
