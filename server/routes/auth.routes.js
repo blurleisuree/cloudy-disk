@@ -181,7 +181,7 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ message: "User not found" }); // Если нет юзера ответ erorr
     }
 
-    const isPassValid = bcrypt.compare(password, user.password); // сравнивает зашифрованный пароль с незашифрованным
+    const isPassValid = bcrypt.compareSync(password, user.password); // сравнивает зашифрованный пароль с незашифрованным
     if (!isPassValid) {
       return res.status(404).json({ message: "Invalid password" });
     }
