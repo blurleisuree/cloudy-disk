@@ -40,6 +40,13 @@ Cloudy Disk — это веб-приложение для хранения и у
    cd cloudy-disk
 2. Установите зависимости для сервера:
 
+## Переменные окружения
+
+- `REACT_APP_API_URL` — URL для API.
+  - Локально: `http://localhost:5000/`
+  - Продакшен: `https://cloudy-disk-server.onrender.com/`
+
+Создай `.env.development` и `.env.production` в корне проекта.
 
 
 ## Лицензия
