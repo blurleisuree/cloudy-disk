@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
-
 import useAuthStore from "../../../../store/authStore";
 import useMessageStore from "../../../../shared/store/messageStore";
+import useAuthForm from "../../hooks/useAuthForm";
 
 import Input from "../../../../shared/components/UI/Input/Input";
 import FormButton from "../../../../shared/components/UI/FormButton/FormButton";
@@ -11,34 +11,18 @@ import ErrorText from "../ErrorText/ErrorText";
 import GetNewCode from "../GetNewCode/GetNewCode";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
-const codeSchema = Yup.object().shape({
-  code: Yup.string()
-    .required("Введите код подтверждения")
-    .matches(/^\d{6}$/, "Код должен состоять из 6 цифр")
-    .trim(),
-});
-
 function VerifyForm() {
   const addMessage = useMessageStore((state) => state.addMessage);
   const email = useLocation().state;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(codeSchema),
+  const { register, handleSubmit, errors } = useAuthForm({
+    formType: "verify",
     mode: "onBlur",
   });
 
-  const navigate = useNavigate();
-
   const { error, verify, resendCode } = useAuthStore();
 
+  const navigate = useNavigate();
   const submitCode = async (data) => {
     try {
       const res = await verify(data.code, email);

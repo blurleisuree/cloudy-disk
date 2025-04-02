@@ -1,4 +1,5 @@
 import useAuthStore from "../../../../store/authStore";
+import useAuthForm from "../../hooks/useAuthForm";
 import { useNavigate } from "react-router";
 
 import Input from "../../../../shared/components/UI/Input/Input";
@@ -8,29 +9,14 @@ import NavText from "../NavText/NavText";
 import ErrorText from "../ErrorText/ErrorText";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
-const emailSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Неправильный формат email")
-    .required("Email обязателен")
-    .max(30, "Слишком большой email")
-    .trim(),
-});
-
 function ForgotForm() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(emailSchema),
+  const { error, loading, forgotPassword } = useAuthStore();
+
+  const { register, handleSubmit, errors } = useAuthForm({
+    formType: "forgotPassword",
     mode: "onBlur",
   });
 
-  const { error, loading, forgotPassword } = useAuthStore();
   const navigate = useNavigate();
   const submitEmail = async (data) => {
     try {

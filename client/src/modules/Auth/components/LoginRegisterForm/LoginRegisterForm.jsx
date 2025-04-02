@@ -1,5 +1,6 @@
 import useAuthStore from "../../../../store/authStore";
 import useShowPassStore from "../../store/showPassStore";
+import useAuthForm from "../../hooks/useAuthForm";
 import { useNavigate } from "react-router";
 
 import Input from "../../../../shared/components/UI/Input/Input";
@@ -9,37 +10,12 @@ import NavText from "../NavText/NavText";
 import ErrorText from "../ErrorText/ErrorText";
 import ShowPass from "../ShowPass/ShowPass";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
-
-const registerSchema = Yup.object().shape({
-  email: Yup.string()
-    .email("Неправильный формат email")
-    .required("Email обязателен")
-    .max(30, "Слишком большой email")
-    .trim(),
-  password: Yup.string()
-    .min(5, "Пароль должен быть не менее 5-ти символов")
-    .max(12, "Пароль должен быть не более 12-ти символов")
-    .required("Пароль обязателен")
-    .matches(
-      /^(?=.*[A-Za-zА-Яа-яЁё])(?=.*\d)[A-Za-zА-Яа-яЁё\d]{5,}$/,
-      "Пароль должен состоять из букв и цифр"
-    ),
-});
-
 function LoginRegisterForm({ isLogin, toggleIsLogin }) {
   const { login, registration, error, loading } = useAuthStore();
   const isShowPass = useShowPassStore((state) => state.isShowPass);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(registerSchema),
+  const { register, handleSubmit, reset, errors } = useAuthForm({
+    formType: "registration",
     mode: "onBlur",
   });
 
