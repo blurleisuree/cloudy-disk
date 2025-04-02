@@ -1,5 +1,5 @@
 import useModalStore from "../store/modalStore";
-import useAuthStore from "../../store/authStore";
+import useAuthStore from "../../shared/store/authStore";
 
 import Btn from "../../shared/components/UI/Btn/Btn";
 

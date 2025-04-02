@@ -1,4 +1,4 @@
-import useAuthStore from "../../../../store/authStore";
+import useAuthStore from "../../../../shared/store/authStore";
 import useAvatarStore from "../../../../shared/store/avatarStore";
 import useMessageStore from "../../../../shared/store/messageStore";
 

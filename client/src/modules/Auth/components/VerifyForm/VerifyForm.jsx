@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router";
-import useAuthStore from "../../../../store/authStore";
+import useAuthStore from "../../../../shared/store/authStore";
 import useMessageStore from "../../../../shared/store/messageStore";
 import useAuthForm from "../../hooks/useAuthForm";
 

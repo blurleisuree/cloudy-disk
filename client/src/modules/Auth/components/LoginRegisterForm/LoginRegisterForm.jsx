@@ -1,4 +1,4 @@
-import useAuthStore from "../../../../store/authStore";
+import useAuthStore from "../../../../shared/store/authStore";
 import useShowPassStore from "../../store/showPassStore";
 import useAuthForm from "../../hooks/useAuthForm";
 import { useNavigate } from "react-router";

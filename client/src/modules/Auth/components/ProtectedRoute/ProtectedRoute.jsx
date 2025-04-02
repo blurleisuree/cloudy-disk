@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import useAuthStore from "../../../../store/authStore";
+import useAuthStore from "../../../../shared/store/authStore";
 import Loader from '../../../../shared/components/UI/Loader/Loader';
 
 function ProtectedRoute() {

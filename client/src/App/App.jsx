@@ -2,7 +2,7 @@ import classes from "./App.module.css";
 
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import useAuthStore from "../store/authStore";
+import useAuthStore from "../shared/store/authStore";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
 

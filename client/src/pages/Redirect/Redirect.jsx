@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import useAuthStore from "../../store/authStore";
+import useAuthStore from "../../shared/store/authStore";
 
 import Loader from "../../shared/components/UI/Loader/Loader";
 

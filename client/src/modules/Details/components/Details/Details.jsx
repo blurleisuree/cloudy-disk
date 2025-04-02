@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAuthStore from "../../../../store/authStore";
+import useAuthStore from "../../../../shared/store/authStore";
 
 import Btn from "../../../../shared/components/UI/Btn/Btn";
 import DetailsInput from "../DetailsInput/DetailsInput";
