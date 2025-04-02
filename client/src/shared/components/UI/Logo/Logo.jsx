@@ -1,7 +1,7 @@
-import logoCloudy from "../../../../assets/logo_cloudy.svg";
-import logoBoth from "../../../../assets/logo_both.svg";
-import logoText from "../../../../assets/logo_text.svg";
-import logoSolo from "../../../../assets/logo_solo.svg";
+import logoCloudy from "../../../../assets/icons/logo_cloudy.svg";
+import logoBoth from "../../../../assets/icons/logo_both.svg";
+import logoText from "../../../../assets/icons/logo_text.svg";
+import logoSolo from "../../../../assets/icons/logo_solo.svg";
 
 function Logo({ className, type = 'cloudy'}) {
   const logoMap = {

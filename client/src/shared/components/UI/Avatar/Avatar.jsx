@@ -1,5 +1,5 @@
 import useAuthStore from "../../../../shared/store/authStore";
-import profileSvg from "../../../../assets/profile.svg";
+import profileSvg from "../../../../assets/icons/profile.svg";
 
 function Avatar({ onClick }) {
   const avatar = useAuthStore((state) => state.user.avatar);
