@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "Cloudy Disk — это веб-приложение для хранения и управления файлами. Позволяет пользователям регистрироваться, входить в систему, загружать и скачивать файлы. Проект построен на React с использованием Zustand для управления состоянием и Node.js для серверной части.",
   "main": "index.js",
-"scripts": {
+  "scripts": {
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blurleisuree/cloudy-disk.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "keywords": [],
   "author": "",
@@ -15,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/blurleisuree/cloudy-disk/issues"
   },
-  "homepage": "https://github.com/blurleisuree/cloudy-disk#readme"
+  "homepage": "https://github.com/blurleisuree/cloudy-disk#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "husky": "^9.1.7"
+  }
 }

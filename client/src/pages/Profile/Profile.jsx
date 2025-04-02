@@ -1,15 +1,10 @@
 import { Outlet } from "react-router";
-import Tabs from "../../components/UI/Tabs/Tabs";
+import Tabs from "./components/Tabs/Tabs";
 
 function Profile() {
-  const tabsElems = [
-    { name: "Настройки", link: "/profile/settings" },
-    { name: "Профиль", link: "/profile/details" },
-  ];
-
   return (
     <div>
-      <Tabs elems={tabsElems} />
+      <Tabs />
       <div className="p-10 flex">
         <Outlet />
       </div>
