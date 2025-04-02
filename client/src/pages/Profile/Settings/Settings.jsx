@@ -11,7 +11,6 @@ function Settings() {
       <Btn className="py-2.5 px-5" handleClick={openExitModal}>
         Выйти на данном устройстве
       </Btn>
-      {/* <Btn className="ml-4">Выйти на всех устройтвах</Btn> */}
     </div>
   );
 }

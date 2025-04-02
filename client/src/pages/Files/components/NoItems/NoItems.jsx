@@ -1,4 +1,4 @@
-import noItemSvg from "../../assets/noItem.svg";
+import noItemSvg from "../../../../assets/noItem.svg";
 
 function NoItems({ title, text }) {
   return (

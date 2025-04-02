@@ -1,6 +1,6 @@
-import FilesDashboard from "../../components/FilesDashboard/FilesDashboard";
-import NoItems from "../../components/NoItems/NoItems";
-import MainTitle from "../../components/UI/MainTitle/MainTitle";
+import {Dashboard} from "../../modules/Dashboard/index";
+import NoItems from "./components/NoItems/NoItems";
+import FilesTitle from "./components/FilesTitle/FilesTitle";
 
 function Files() {
   // const files = [
@@ -18,8 +18,13 @@ function Files() {
 
   return (
     <div>
-      <MainTitle>Файлы</MainTitle>
-      {files.length === 0 ? <NoItems title="Пока здесь пусто" text="Добавьте сюда файлы"/> : <FilesDashboard files={files} />}
+      {/* FilesTitle */}
+      <FilesTitle>Файлы</FilesTitle>
+      {files.length === 0 ? (
+        <NoItems title="Пока здесь пусто" text="Добавьте сюда файлы" />
+      ) : (
+        <Dashboard files={files} />
+      )}
     </div>
   );
 }

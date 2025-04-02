@@ -1,4 +1,4 @@
-function FilesDashboardElem({ elem }) {
+function DashboardElem({ elem }) {
   return (
     <div className="grid grid-cols-[5fr_1fr_1fr] gap-2 min-w-[600px] cursor-pointer hover:bg-blue-50 transition py-5 px-12">
       <div className="flex-row items-center">
@@ -11,4 +11,4 @@ function FilesDashboardElem({ elem }) {
   );
 }
 
-export default FilesDashboardElem;
+export default DashboardElem;

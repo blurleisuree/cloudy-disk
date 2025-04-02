@@ -62,6 +62,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Main />}>
             <Route index element={<Navigate to="files" replace />} />
+            {/* {filesPages.map((page) => <Route path={page.path} element={<Files type={page.type}/>} />)} */}
             <Route path="files" element={<Files />} />
             <Route path="favourite" element={<Favourite />} />
             <Route path="profile" element={<Profile />}>
