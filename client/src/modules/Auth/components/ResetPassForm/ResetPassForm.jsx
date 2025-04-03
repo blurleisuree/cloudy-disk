@@ -2,6 +2,7 @@ import useAuthStore from "../../../../shared/store/authStore";
 import useMessageStore from "../../../../shared/store/messageStore";
 import useShowPassStore from "../../store/showPassStore";
 import useAuthForm from "../../hooks/useAuthForm";
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import Input from "../../../../shared/components/UI/Input/Input";
@@ -14,7 +15,11 @@ import GetNewCode from "../GetNewCode/GetNewCode";
 import FormSubtitle from "../FormSubtitle/FormSubtitle";
 
 function ResetPassForm() {
-  const isShowPass = useShowPassStore((state) => state.isShowPass);
+  const { isShowPass, resetIsShowPass } = useShowPassStore();
+
+  useEffect(() => {
+    resetIsShowPass();
+  }, [resetIsShowPass]);
 
   const { register, handleSubmit, errors } = useAuthForm({
     formType: "resetPassword",

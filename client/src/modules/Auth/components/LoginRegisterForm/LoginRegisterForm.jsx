@@ -9,10 +9,15 @@ import FormTitle from "../FormTitle/FormTitle";
 import NavText from "../NavText/NavText";
 import ErrorText from "../ErrorText/ErrorText";
 import ShowPass from "../ShowPass/ShowPass";
+import { useEffect } from "react";
 
 function LoginRegisterForm({ isLogin, toggleIsLogin }) {
   const { login, registration, error, loading, resendCode } = useAuthStore();
-  const isShowPass = useShowPassStore((state) => state.isShowPass);
+  const { isShowPass, resetIsShowPass } = useShowPassStore();
+
+  useEffect(() => {
+    resetIsShowPass();
+  }, [resetIsShowPass]);
 
   const { register, handleSubmit, reset, errors } = useAuthForm({
     formType: isLogin ? "login" : "registration",
@@ -33,7 +38,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
       console.log(e);
       // В случае если пользователь с неподтвержденной почтой
       if (e.message === "Подтвердите email для входа") {
-        resendCode(data.email)
+        resendCode(data.email);
         navigate("/auth/verify", { state: data.email });
       }
     }

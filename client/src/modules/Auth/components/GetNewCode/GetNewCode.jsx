@@ -3,7 +3,7 @@ import useNewCodeStore from "../../store/newCodeStore";
 import ErrorText from "../ErrorText/ErrorText";
 
 function GetNewCode({ email, resendFunc }) {
-  const { codeIsResend, getNewCode, error, disableCodeIsResend } =
+  const { codeIsResend, getNewCode, error, resetCodeIsResend } =
     useNewCodeStore();
 
   function handleClick() {
@@ -13,8 +13,8 @@ function GetNewCode({ email, resendFunc }) {
   }
 
   useEffect(() => {
-    disableCodeIsResend();
-  }, [disableCodeIsResend]);
+    resetCodeIsResend();
+  }, [resetCodeIsResend]);
 
   if (error) return <ErrorText>{error.message}</ErrorText>;
 
