@@ -1,8 +1,7 @@
 import classes from "./App.module.css";
 
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import useAuthStore from "../shared/store/authStore";
+import useAuthCheck from "../shared/hooks/useAuthCheck.js";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
 import {
@@ -19,7 +18,7 @@ import Main from "../pages/Main/Main";
 import Files from "../pages/Files/Files";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import Profile from "../pages/Profile/Profile.jsx";
-import SettingsPage from '../pages/Profile/SettingsPage/SettingsPages.jsx'
+import SettingsPage from "../pages/Profile/SettingsPage/SettingsPages.jsx";
 import DetailsPage from "../pages/Profile/DetailsPage/DetailsPage.jsx";
 
 import Message from "../shared/components/Message/Message.jsx";
@@ -27,19 +26,7 @@ import Loader from "../shared/components/UI/Loader/Loader.jsx";
 import Modal from "../shared/components/Modal/Modal.jsx";
 
 function App() {
-  const checkAuth = useAuthStore((state) => state.checkAuth);
-  const loading = useAuthStore((state) => state.loading);
-
-  useEffect(() => {
-    const verifyAuth = async () => {
-      try {
-        await checkAuth();
-      } catch (e) {
-        console.error("Ошибка проверки авторизации:", e);
-      }
-    };
-    verifyAuth();
-  }, [checkAuth]);
+  const { loading } = useAuthCheck();
 
   if (loading) return <Loader fullPage={true} />;
 
