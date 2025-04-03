@@ -11,7 +11,7 @@ import ErrorText from "../ErrorText/ErrorText";
 import ShowPass from "../ShowPass/ShowPass";
 
 function LoginRegisterForm({ isLogin, toggleIsLogin }) {
-  const { login, registration, error, loading } = useAuthStore();
+  const { login, registration, error, loading, resendCode } = useAuthStore();
   const isShowPass = useShowPassStore((state) => state.isShowPass);
 
   const { register, handleSubmit, reset, errors } = useAuthForm({
@@ -33,6 +33,7 @@ function LoginRegisterForm({ isLogin, toggleIsLogin }) {
       console.log(e);
       // В случае если пользователь с неподтвержденной почтой
       if (e.message === "Подтвердите email для входа") {
+        resendCode(data.email)
         navigate("/auth/verify", { state: data.email });
       }
     }
