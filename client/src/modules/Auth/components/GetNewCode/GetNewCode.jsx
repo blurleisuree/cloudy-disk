@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import useNewCodeStore from "../../store/newCodeStore";
 import ErrorText from "../ErrorText/ErrorText";
 
-function GetNewCode({email, resendFunc}) {
-  const { codeIsResend, getNewCode, error } = useNewCodeStore();
+function GetNewCode({ email, resendFunc }) {
+  const { codeIsResend, getNewCode, error, disableCodeIsResend } =
+    useNewCodeStore();
 
   function handleClick() {
     return () => {
@@ -10,12 +12,18 @@ function GetNewCode({email, resendFunc}) {
     };
   }
 
+  useEffect(() => {
+    disableCodeIsResend();
+  }, [disableCodeIsResend]);
+
   if (error) return <ErrorText>{error.message}</ErrorText>;
 
   return (
     <div>
       {codeIsResend ? (
-        <p className="text-primary-color mt-2">Новый код отправлен! Проверьте почту</p>
+        <p className="text-primary-color mt-2">
+          Новый код отправлен! Проверьте почту
+        </p>
       ) : (
         <p className="mt-6">
           Пожалуйста, проверьте папку со спамом.{" "}
