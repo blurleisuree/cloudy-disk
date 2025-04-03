@@ -13,6 +13,8 @@ const useNewCode = create((set) => ({
       console.log(e);
     }
   },
+
+  resetCodeIsResend: () => set({ codeIsResend: false }),
 }));
 
 export default useNewCode;

@@ -6,6 +6,8 @@ const useShowPassStore = create((set) => ({
   toggleIsShowPass: () => {
     set((state) => ({ isShowPass: !state.isShowPass }));
   },
+
+  resetIsShowPass: () => set({ isShowPass: false }),
 }));
 
 export default useShowPassStore;
