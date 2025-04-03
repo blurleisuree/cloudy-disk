@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import useAuthStore from "../shared/store/authStore";
 
 import AuthPage from "../pages/AuthPage/AuthPage";
-
 import {
   AuthContainer,
   ResetPassForm,
